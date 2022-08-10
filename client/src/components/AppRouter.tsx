@@ -15,11 +15,11 @@ const AppRouter: React.FC = () => {
 
     return (
         <Routes>
-            {isAuth && role === 'ADMIN' && adminRoutes.map(({ path, Component }) =>
+            {isAuth && role === 'admin' && adminRoutes.map(({ path, Component }) =>
                 <Route key={path} path={path} element={<Component />} />
             )}
 
-            {isAuth && role === 'SLAVE' && slaveRoutes.map(({ path, Component }) =>
+            {isAuth && role === 'slave' && slaveRoutes.map(({ path, Component }) =>
                 <Route key={path} path={path} element={<Component />} />
             )}
 

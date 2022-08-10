@@ -4,9 +4,9 @@ const sqlConfig = require('../db');
 const sql = require('mssql');
 const bcrypt = require('bcrypt');
 
-const generateJwt = (user_id, login, role) => {
+const generateJwt = (login, role) => {
     return jwt.sign(
-        {user_id, login, role},
+        { login, role},
         process.env.SECRET_KEY,
         {expiresIn: '24h'}
     )
@@ -32,6 +32,11 @@ class UserController {
         } catch (e) {
             return res.json(e.message);
         }
+    }
+
+    async auth(req, res) {
+        const token = generateJwt(req.user.login, req.user.role)
+        return res.json({token})
     }
 
     async get_orgs(req, res, next) {
