@@ -4,6 +4,7 @@ import AdminPage from './pages/admin/AdminPage'
 import RegistrationPage from './pages/registration/RegistrationPage';
 import SlavePage from './pages/slave/SlavePage';
 import LoginPage from './pages/login/LoginPage';
+import UsersPage from './pages/users/UsersPage';
 
 interface IRoutes{
     path: string,
@@ -18,6 +19,10 @@ export const adminRoutes: IRoutes[] = [
     {
         path: routes.REGISTRATION_ROUTE,
         Component: RegistrationPage
+    },
+    {
+        path: routes.USERS_ROUTE,
+        Component: UsersPage
     }
 ]
 

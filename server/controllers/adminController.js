@@ -41,6 +41,17 @@ class AdminController {
         }
     }
 
+    async get_users(req, res, next) {
+        try {
+            let pool = await sql.connect(sqlConfig)
+            const users = await pool.request()
+                .query('SELECT login, role FROM users')
+            return res.json(users.recordset)
+        } catch (e) {
+            return res.json(e.message);
+        }
+    }
+
     async delete_user(req, res, next) {
         try {
             const { login } = req.body

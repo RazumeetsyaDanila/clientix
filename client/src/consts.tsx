@@ -14,7 +14,8 @@ export enum routes{
     ADMIN_ROUTE = '/admin',
     SLAVE_ROUTE = '/slave',
     LOGIN_ROUTE = '/login',
-    REGISTRATION_ROUTE = '/registration'
+    REGISTRATION_ROUTE = '/registration',
+    USERS_ROUTE = '/users'
 }
 
-export const correct_routes: string[] = ['admin', 'slave', 'login', 'registration']
+export const correct_routes: string[] = ['admin', 'slave', 'login', 'users', 'registration']
