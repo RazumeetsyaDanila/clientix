@@ -1,0 +1,45 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+input {
+    height: 40px;
+    width: 300px;
+    margin-bottom: 10px;
+    font-size: 18px;
+    padding-left: 10px;
+    &:focus {
+        background-color: transparent;
+        outline: none;
+        border: 2px solid black;
+    }
+}
+
+button {
+    width: 300px;
+    height: 40px;
+    background-color: black;
+    border: 2px solid black;
+    color: white;
+    &:hover {
+        cursor: pointer;
+        background-color: white;
+        color: black;
+    }
+}
+
+.errorContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    & button{
+        width: 100px;
+        margin-top: 10px;
+    }
+}

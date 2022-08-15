@@ -2,9 +2,9 @@ const Router = require('express')
 const router = new Router()
 const adminController = require('../controllers/adminController')
 const authMiddleware = require('../middleware/authMiddleware')
+const checkRoleMiddleware = require('../middleware/checkRoleMiddleware')
 
-router.post('/registration', adminController.registration)
-// router.post('/login', userController.login)
-// router.get('/auth', authMiddleware, userController.auth)
+router.post('/registration', checkRoleMiddleware('admin'), adminController.registration)
+router.post('/delete_user', checkRoleMiddleware('admin'), adminController.delete_user)
 
 module.exports = router
