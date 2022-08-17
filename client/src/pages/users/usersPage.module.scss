@@ -1,0 +1,26 @@
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.tempLinkBtn{
+	width: 100px;
+	height: 30px;
+	background-color: black;
+	border: 2px black solid;
+	color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	&:hover{
+		background-color: white;
+		color: black;
+	}
+}
+
+a{
+	text-decoration: none;
+}

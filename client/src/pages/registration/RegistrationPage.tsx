@@ -1,8 +1,9 @@
 import React from 'react';
+import s from './registrationPage.module.scss'
 
 const RegistrationPage = () => {
     return (
-        <div>
+        <div className={s.container}>
             registration page
         </div>
     );

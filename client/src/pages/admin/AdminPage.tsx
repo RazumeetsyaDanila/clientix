@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import s from './adminPage.module.scss'
 
 const AdminPage = () => {
@@ -6,6 +7,11 @@ const AdminPage = () => {
         <div className={s.container}>
             <div>
                 ADMIN PAGE
+                <NavLink to='/users'>
+                    <div className={s.tempLinkBtn}>
+                        Users
+                    </div>
+                </NavLink>
             </div>
 
             <table>
