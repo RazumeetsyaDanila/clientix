@@ -7,7 +7,7 @@ export const fetchUsers = () => {
     return async (dispatch: Dispatch<IUsersAction>) => {
         try {
             dispatch({ type: UsersActionTypes.FETCH_USERS })
-            const { data } = await $authHost.get('api/admin/users')
+            const { data } = await $authHost.get('api/admin/get_users')
             dispatch({ type: UsersActionTypes.FETCH_USERS_SUCCESS, payload: data })
 
 
