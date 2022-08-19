@@ -4,6 +4,7 @@ import { useActions } from '../../hooks/useActions';
 import { Link, NavLink } from 'react-router-dom';
 import { routes } from '../../consts';
 import s from './usersPage.module.scss'
+import { delete_user } from '../../http/usersAPI';
 
 const UsersPage = () => {
     const { users, loading, error } = useTypedSelector(state => state.users)
@@ -21,19 +22,21 @@ const UsersPage = () => {
     const userDelete = async (lgn: string) => {
         await delete_user(lgn).then(data => alert(data.message))
         try {
-            // await delete_user(lgn)
+            await delete_user(lgn)
             fetchUsers()
         } catch (e: any) {
             alert(e.response.data.message)
         }
-
     }
 
     console.log(users)
 
     return (
         <div className={s.container}>
-            USERS PAGE
+            <div>
+                USERS PAGE
+            </div>
+
             <NavLink to='/registration'>
                 <div className={s.tempLinkBtn}>
                     Registration
@@ -55,7 +58,7 @@ const UsersPage = () => {
                         <td data-th="Удалить">
                             {
                                 u.login !== 'admin' && u.login !== currentUserLogin &&
-                                <div onClick={userDelete.bind(this, u.login)} > Удалить </div>
+                                <div onClick={userDelete.bind(this, u.login)} className='underline'> Удалить </div>
                             }</td>
                     </tr>
                     )}

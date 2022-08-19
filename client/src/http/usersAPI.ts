@@ -6,6 +6,6 @@ export const get_users = async () => {
 }
 
 export const delete_user = async (login: string) => {
-    const {data} = await $authHost.post('api/admin/delete', {login} )
+    const {data} = await $authHost.post('api/admin/delete_user', {login} )
     return data
 }
