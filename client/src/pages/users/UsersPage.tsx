@@ -62,6 +62,10 @@ const UsersPage = () => {
                     )}
                 </tbody>
             </table>
+
+            <NavLink to='/admin' className='btn w-[120px] h-[30px]'>
+                ← back to main
+            </NavLink>
         </div>
     );
 };
