@@ -51,10 +51,10 @@ const LoginPage: React.FC = () => {
 
     return (
         <div className={s.container}>
-            <div className='mb-4 text-3xl'>Авторизация</div>
-            <input className={s.input} type="text" placeholder="login" value={login} onChange={e => setLogin(e.target.value)} />
-            <input className={s.input} type="password" placeholder="password" value={password} onChange={e => setPassword(e.target.value)} />
-            <button className={s.button} onClick={auth}>Войти</button>
+            <div className='mb-3 text-3xl'>Авторизация</div>
+            <input className='authInput' type="text" placeholder="login" value={login} onChange={e => setLogin(e.target.value)} />
+            <input className='authInput' type="password" placeholder="password" value={password} onChange={e => setPassword(e.target.value)} />
+            <button className='authButton' onClick={auth}>Войти</button>
 
             <ErrorModal visible={errorModal} setVisible={setErrorModal}>
                 <div className={s.errorContainer}>

@@ -600,7 +600,11 @@ video {
   line-height: 2.25rem;
 }
 
-.underline {
-  -webkit-text-decoration-line: underline;
-          text-decoration-line: underline;
+.text-\[\#1a1dd3\] {
+  --tw-text-opacity: 1;
+  color: rgb(26 29 211 / var(--tw-text-opacity));
+}
+
+.hover\:cursor-wait:hover {
+  cursor: wait;
 }

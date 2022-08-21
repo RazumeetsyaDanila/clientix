@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import "./app.scss";
 import AppRouter from './components/AppRouter';
 import { check } from './http/userAPI';
 import { useActions } from './hooks/useActions';

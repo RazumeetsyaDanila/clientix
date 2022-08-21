@@ -29,11 +29,9 @@ const UsersPage = () => {
         }
     }
 
-    console.log(users)
-
     return (
         <div className={s.container}>
-            <div>
+            <div className=''>
                 USERS PAGE
             </div>
 
@@ -43,7 +41,7 @@ const UsersPage = () => {
                 </div>
             </NavLink>
 
-            <table>
+            <table className='w-[400px] mt-[20px]'>
                 <thead>
                     <tr>
                         <th>Логин</th>
@@ -58,7 +56,7 @@ const UsersPage = () => {
                         <td data-th="Удалить">
                             {
                                 u.login !== 'admin' && u.login !== currentUserLogin &&
-                                <div onClick={userDelete.bind(this, u.login)} className='underline'> Удалить </div>
+                                <div onClick={userDelete.bind(this, u.login)} className='hover:cursor-pointer hover:text-[#ff1919]'> Удалить </div>
                             }</td>
                     </tr>
                     )}
