@@ -1,6 +1,6 @@
 import { useState} from 'react';
 import s from './registrationPage.module.scss'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, NavLink } from 'react-router-dom';
 import { routes } from '../../consts';
 import { registration } from '../../http/userAPI';
 
@@ -28,6 +28,10 @@ const RegistrationPage = () => {
             <input className='authInput' type="text" placeholder="login" value={login} onChange={e => setLogin(e.target.value)} />
             <input className='authInput' type="password" placeholder="password" value={password} onChange={e => setPassword(e.target.value)} />
             <button className='authButton' onClick={reg} >Добавить</button>
+
+            <NavLink to='/users' className='btn w-[124px] h-[30px] backBtnPos'>
+                ← back to users
+            </NavLink>
         </div>
     );
 };

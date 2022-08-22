@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import s from './adminPage.module.scss'
+import { useActions } from '../../hooks/useActions';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
 
 const AdminPage = () => {
     return (
@@ -28,14 +30,18 @@ const AdminPage = () => {
                 <tbody>
                     <tr>
                         <td className={s.td1}>Меркуримед</td>
-                        <td>123123123</td>
-                        <td>skdjbcksjdbck sdkh cksjd skjdh cksjdh</td>
-                        <td>Q12werty</td>
-                        <td>7776</td>
-                        <td>* * *</td>
+                        <td className={s.tableTd}>123123123</td>
+                        <td className={s.tableTd}>skdjbcksjdbck sdkh cksjd skjdh cksjdh</td>
+                        <td className={s.tableTd}>Q12werty</td>
+                        <td className={s.tableTd}>7776</td>
+                        <td className={s.tableTd}>* * *</td>
                     </tr>
                 </tbody>
             </table>
+
+            <NavLink to='/login' className='btn w-[124px] h-[30px] backBtnPos'>
+                ← back to login
+            </NavLink>
         </div>
     );
 };
