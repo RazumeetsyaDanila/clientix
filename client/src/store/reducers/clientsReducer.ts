@@ -1,7 +1,7 @@
 import { ClientsInitialState } from '../initialState';
 import { IClientsAction, ClientsActionTypes, IClientsState } from '../../types/clientsTypes';
 
-export const ClientsReducer = (state = ClientsInitialState, action: IClientsAction): IClientsState => {
+export const clientsReducer = (state = ClientsInitialState, action: IClientsAction): IClientsState => {
     switch (action.type){
         case ClientsActionTypes.FETCH_CLIENTS:
             return {...state, loading: true}

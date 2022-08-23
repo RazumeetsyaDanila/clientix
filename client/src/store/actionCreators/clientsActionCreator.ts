@@ -7,7 +7,7 @@ export const fetchClients = () => {
     return async (dispatch: Dispatch<IClientsAction>) => {
         try {
             dispatch({ type: ClientsActionTypes.FETCH_CLIENTS })
-            const { data } = await $authHost.get('api/admin/get_clients')
+            const { data } = await $authHost.get('api/user/get_orgs')
             dispatch({ type: ClientsActionTypes.FETCH_CLIENTS_SUCCESS, payload: data })
         } catch (e) {
             dispatch({ type: ClientsActionTypes.FETCH_CLIENTS_ERROR, payload: 'Ошибка при загрузке списка организаций!' })

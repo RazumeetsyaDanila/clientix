@@ -1,7 +1,9 @@
-import * as UserActionCreators from './userActionCreator'
-import * as UsersActionCreators from './usersActionCreator'
+import * as UserActionCreator from './userActionCreator'
+import * as UsersActionCreator from './usersActionCreator'
+import * as ClientsActionCreator from './clientsActionCreator'
 
 export default {
-    ...UserActionCreators,
-    ...UsersActionCreators
+    ...UserActionCreator,
+    ...UsersActionCreator,
+    ...ClientsActionCreator
 }

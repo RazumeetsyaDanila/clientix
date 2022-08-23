@@ -39,14 +39,21 @@ const UsersPage = () => {
         }
     }
 
+    if (loading) {
+        return <h1 className='centerContainer h-screen text-2xl'>Идет загрузка...</h1>
+    }
+
+    if (error) {
+        return <h1>{error}</h1>
+    }
 
     return (
         <div className={s.container}>
-            <div className='select-none'>
-                USERS PAGE
+            <div className='select-none text-xl'>
+                Пользователи:
             </div>           
 
-            <table className='w-[400px] mt-[20px]'>
+            <table className='w-[400px] mt-[10px]'>
                 <thead>
                     <tr>
                         <th>Логин</th>

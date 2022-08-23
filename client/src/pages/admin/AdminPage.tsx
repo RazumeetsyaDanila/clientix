@@ -5,18 +5,30 @@ import { useActions } from '../../hooks/useActions';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 
 const AdminPage = () => {
+
+    const { clients, loading, error } = useTypedSelector(state => state.clients)
+    const { unsetUser, fetchClients } = useActions()
+
+    const logOut = () => {
+        unsetUser()
+    }
+
+    useEffect(() => {
+        fetchClients()
+    }, [])
+
     return (
         <div className={s.container}>
             <div>
                 ADMIN PAGE
                 <NavLink to='/users'>
-                    <div className={s.tempLinkBtn}>
+                    <div className={s.tempLinkBtn + ' usersBtnPos'}>
                         Users
                     </div>
                 </NavLink>
             </div>
 
-            <table>
+            <table className='w-[75vw]'>
                 <thead>
                     <tr>
                         <th>Название организации</th>
@@ -28,18 +40,24 @@ const AdminPage = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td className={s.td1}>Меркуримед</td>
-                        <td className={s.tableTd}>123123123</td>
-                        <td className={s.tableTd}>skdjbcksjdbck sdkh cksjd skjdh cksjdh</td>
-                        <td className={s.tableTd}>Q12werty</td>
-                        <td className={s.tableTd}>7776</td>
-                        <td className={s.tableTd}>* * *</td>
+                    {clients.map(c => <tr key={c.org_id}>
+                        <td className={s.tableTd + ' w-[280px]'} data-th="Название организации">{c.org_name}</td>
+                        <td className={s.tableTd + ' w-[150px]'} data-th="AnyDesk">{c.anydesk}</td>
+                        <td className={s.tableTd} data-th="RDP">{c.rdp}</td>
+                        <td className={s.tableTd + ' w-[180px]'} data-th="Пароль sa">{c.sa_password}</td>
+                        <td className={s.tableTd + ' w-[180px]'} data-th="Пароль в Симеде">{c.simed_admin_pass}</td>
+                        <td className={s.tableTd + ' w-[180px]'} data-th="Удалить">
+                            {/* {
+                                u.login !== 'admin' && u.login !== 'slave' && u.login !== currentUserLogin &&
+                                <div onClick={startDeleteUser.bind(this, u.login)} className='hover:cursor-pointer hover:text-[#ff1919]'> Удалить </div>
+                            } */}
+                        </td>
                     </tr>
+                    )}
                 </tbody>
             </table>
 
-            <NavLink to='/login' className='btn w-[124px] h-[30px] backBtnPos'>
+            <NavLink to='/login' className='btn w-[124px] h-[30px] backBtnPos' onClick={logOut}>
                 ← back to login
             </NavLink>
         </div>
