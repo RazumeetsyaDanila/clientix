@@ -71,14 +71,25 @@
 	}
 }
 
+.linkBtn{
+	width: 100px;
+	height: 30px;
+	background-color: black;
+	border: 2px black solid;
+	color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	&:hover{
+		background-color: white;
+		color: black;
+	}
+}
+
 .backBtnPos{
     position: fixed;
     bottom: 40px;
     left: 50px;
-    // opacity: 0.3;
-    // &:hover{
-    //     opacity: 1;
-    // }
 }
 
 .usersBtnPos{

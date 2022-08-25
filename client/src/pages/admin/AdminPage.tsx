@@ -21,11 +21,10 @@ const AdminPage = () => {
         <div className={s.container}>
             <div>
                 ADMIN PAGE
-                <NavLink to='/users'>
-                    <div className={s.tempLinkBtn + ' usersBtnPos'}>
-                        Users
-                    </div>
+                <NavLink className='linkBtn usersBtnPos' to='/users'>
+                    Users
                 </NavLink>
+
             </div>
 
             <table className='w-[75vw]'>
@@ -56,6 +55,10 @@ const AdminPage = () => {
                     )}
                 </tbody>
             </table>
+
+            <NavLink className='linkBtn' to='/org_add'>
+                Add Org
+            </NavLink>
 
             <NavLink to='/login' className='btn w-[124px] h-[30px] backBtnPos' onClick={logOut}>
                 ← back to login

@@ -1,5 +1,4 @@
 import { useState} from 'react';
-import s from './registrationPage.module.scss'
 import { useNavigate, NavLink } from 'react-router-dom';
 import { routes } from '../../consts';
 import { registration } from '../../http/userAPI';
@@ -15,9 +14,6 @@ const RegistrationPage = () => {
             await registration(login, password, role)
             navigate(routes.USERS_ROUTE)
         } catch (e: any) {
-            // setErrorText(e.response.data.message)
-            // setErrorModal(true)
-            // errorSound()
             alert(e.response.data.message)
         }
     }
