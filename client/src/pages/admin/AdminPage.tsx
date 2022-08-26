@@ -20,7 +20,7 @@ const AdminPage = () => {
     return (
         <div className={s.container}>
             <div>
-                ADMIN PAGE
+                DUNGEON MASTER PANEL
                 <NavLink className='linkBtn usersBtnPos' to='/users'>
                     Users
                 </NavLink>
