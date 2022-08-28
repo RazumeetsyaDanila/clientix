@@ -72,7 +72,7 @@
 }
 
 .linkBtn{
-	width: 100px;
+	// width: 100px;
 	height: 30px;
 	background-color: black;
 	border: 2px black solid;
@@ -96,4 +96,15 @@
     position: fixed;
     bottom: 40px;
     right: 50px;
+}
+
+.headerContainer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px 0 10px;
+    border: black 2px solid;
+    margin-top: 10px;
+    height: 50px;
+    width: 75vw;
 }

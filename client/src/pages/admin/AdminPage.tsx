@@ -3,14 +3,24 @@ import { NavLink } from 'react-router-dom';
 import s from './adminPage.module.scss'
 import { useActions } from '../../hooks/useActions';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
+import { useClipboard } from 'use-clipboard-copy';
 
 const AdminPage = () => {
 
     const { clients, loading, error } = useTypedSelector(state => state.clients)
+    const currentUserLogin = useTypedSelector(state => state.user.login)
     const { unsetUser, fetchClients } = useActions()
+    const clipboard = useClipboard()
+    const [anydeskCopy, setAnydeskCopy] = useState(false)
 
     const logOut = () => {
         unsetUser()
+    }
+
+    const copy = (text: string, targetSetState: any) => {
+        clipboard.copy(text)
+        targetSetState(true)
+        setTimeout(() => { targetSetState(false) }, 1000)
     }
 
     useEffect(() => {
@@ -19,12 +29,14 @@ const AdminPage = () => {
 
     return (
         <div className={s.container}>
-            <div>
-                DUNGEON MASTER PANEL
-                <NavLink className='linkBtn usersBtnPos' to='/users'>
-                    Users
-                </NavLink>
 
+            <p className='text-[20px]'>Добро пожаловать, {currentUserLogin}!</p>
+            <div className='headerContainer'>
+                <NavLink to='/login' className='btn w-[90px] h-[30px]' onClick={logOut}>← Выйти</NavLink>
+                <div className='flex justify-between w-[330px]'>
+                    <NavLink className='linkBtn w-[200px]' to='/org_add'>Добавить организацию</NavLink>
+                    <NavLink className='linkBtn w-[120px]' to='/users'>Пользователи</NavLink>
+                </div>
             </div>
 
             <table className='w-[75vw]'>
@@ -41,7 +53,7 @@ const AdminPage = () => {
                 <tbody>
                     {clients.map(c => <tr key={c.org_id}>
                         <td className={s.tableTd + ' w-[280px]'} data-th="Название организации">{c.org_name}</td>
-                        <td className={s.tableTd + ' w-[150px]'} data-th="AnyDesk">{c.anydesk}</td>
+                        <td className={s.tableTd + ' w-[150px] cursor-pointer'} data-th="AnyDesk" onClick={() => copy(c.anydesk, setAnydeskCopy)}>{c.anydesk}</td>
                         <td className={s.tableTd} data-th="RDP">{c.rdp}</td>
                         <td className={s.tableTd + ' w-[180px]'} data-th="Пароль sa">{c.sa_password}</td>
                         <td className={s.tableTd + ' w-[180px]'} data-th="Пароль в Симеде">{c.simed_admin_pass}</td>
@@ -56,13 +68,9 @@ const AdminPage = () => {
                 </tbody>
             </table>
 
-            <NavLink className='linkBtn' to='/org_add'>
-                Add Org
-            </NavLink>
 
-            <NavLink to='/login' className='btn w-[124px] h-[30px] backBtnPos' onClick={logOut}>
-                ← back to login
-            </NavLink>
+
+
         </div>
     );
 };

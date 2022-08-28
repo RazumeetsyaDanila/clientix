@@ -5,7 +5,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { routes } from '../../consts';
 import s from './usersPage.module.scss'
 import { delete_user } from '../../http/usersAPI';
-import ErrorModal from '../../components/UI/errorModal/ErrorModal';
+import ErrorModal from '../../components/UI/modal/Modal';
 
 
 const UsersPage = () => {

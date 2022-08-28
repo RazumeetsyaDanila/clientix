@@ -1,4 +1,4 @@
-import classes from './errorModal.module.scss'
+import classes from './modal.module.scss'
 import React from 'react';
 
 const Modal: React.FC<any> = ({children, visible, setVisible}) => {

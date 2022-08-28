@@ -2,18 +2,17 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useActions } from '../../hooks/useActions';
 import { routes } from '../../consts';
-import { loginf, registration } from '../../http/userAPI';
+import { loginf } from '../../http/userAPI';
 import s from './loginPage.module.scss'
 import stickYourFingerInMyAss from '../../sounds/stick-your-finger-in-my-ass.mp3';
 import ohShitIamSorry from '../../sounds/oh-shit-iam-sorry.mp3';
 import fistingIs300 from '../../sounds/fisting-is-300.mp3';
-import ErrorModal from '../../components/UI/errorModal/ErrorModal';
+import Modal from '../../components/UI/modal/Modal';
 
 const LoginPage: React.FC = () => {
     const navigate = useNavigate()
     const [login, setLogin] = useState('')
     const [password, setPassword] = useState('')
-    const [role, setRole] = useState('slave')
     const [errorModal, setErrorModal] = useState(false)
     const [errorText, setErrorText] = useState('')
     const { setUser } = useActions()
@@ -56,12 +55,12 @@ const LoginPage: React.FC = () => {
             <input className='authInput' type="password" placeholder="password" value={password} onChange={e => setPassword(e.target.value)} />
             <button className='authButton' onClick={auth}>Войти</button>
 
-            <ErrorModal visible={errorModal} setVisible={setErrorModal}>
+            <Modal visible={errorModal} setVisible={setErrorModal}>
                 <div className={s.errorContainer}>
-                    {errorText}
+                    <p className='w-[250px] text-center'>{errorText}</p>
                     <button onClick={() => setErrorModal(false)}>OK</button>
                 </div>
-            </ErrorModal>
+            </Modal>
         </div>
     );
 };
