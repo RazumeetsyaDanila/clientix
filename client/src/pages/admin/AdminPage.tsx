@@ -4,6 +4,7 @@ import s from './adminPage.module.scss'
 import { useActions } from '../../hooks/useActions';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { useClipboard } from 'use-clipboard-copy';
+import CopiedText from './../../components/UI/copiedText/CopiedText';
 
 const AdminPage = () => {
 
@@ -53,7 +54,8 @@ const AdminPage = () => {
                 <tbody>
                     {clients.map(c => <tr key={c.org_id}>
                         <td className={s.tableTd + ' w-[280px]'} data-th="Название организации">{c.org_name}</td>
-                        <td className={s.tableTd + ' w-[150px] cursor-pointer'} data-th="AnyDesk" onClick={() => copy(c.anydesk, setAnydeskCopy)}>{c.anydesk}</td>
+                        {/* <td className={s.tableTd + ' w-[150px]'} data-th="AnyDesk" onClick={() => copy(c.anydesk, setAnydeskCopy)}>{c.anydesk}</td> */}
+                        <td className={s.tableTd + ' w-[150px]'} data-th="AnyDesk" ><CopiedText text={c.anydesk}/></td>
                         <td className={s.tableTd} data-th="RDP">{c.rdp}</td>
                         <td className={s.tableTd + ' w-[180px]'} data-th="Пароль sa">{c.sa_password}</td>
                         <td className={s.tableTd + ' w-[180px]'} data-th="Пароль в Симеде">{c.simed_admin_pass}</td>
