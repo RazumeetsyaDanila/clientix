@@ -65,9 +65,7 @@ class UserController {
 
             await pool.request()
                 .input('org_name', sql.VarChar, org_name)
-                .input('anydesk', sql.VarChar, anydesk)
                 .input('sql_name', sql.VarChar, sql_name)
-                .input('rdp', sql.VarChar, rdp)
                 .input('sa_password', sql.VarChar, sa_password)
                 .input('mongo_db', sql.VarChar, mongo_db)
                 .input('simed_admin_pass', sql.VarChar, simed_admin_pass)
@@ -75,8 +73,8 @@ class UserController {
                 .input('smsc_login', sql.VarChar, smsc_login)
                 .input('smsc_pass', sql.VarChar, smsc_pass)
                 .input('dadata', sql.VarChar, dadata)
-                .query('INSERT INTO organizations (org_name, anydesk, sql_name, rdp, sa_password, mongo_db, simed_admin_pass, egisz, smsc_login, smsc_pass, dadata)' +
-                    'VALUES (@org_name, @anydesk, @sql_name, @rdp, @sa_password, @mongo_db, @simed_admin_pass, @egisz, @smsc_login, @smsc_pass, @dadata)')
+                .query('INSERT INTO organizations (org_name, sql_name, sa_password, mongo_db, simed_admin_pass, egisz, smsc_login, smsc_pass, dadata)' +
+                    'VALUES (@org_name, @sql_name, @sa_password, @mongo_db, @simed_admin_pass, @egisz, @smsc_login, @smsc_pass, @dadata)')
             return res.json({ message: "Организация добавлена!" })
         } catch (e) {
             return res.json(e.message);

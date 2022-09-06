@@ -9,7 +9,7 @@ const CopiedText: React.FC<any> = ({text}) => {
     const copy = (text: string) => {
         clipboard.copy(text)
         setCopied(true)
-        setTimeout(() => { setCopied(false) }, 1000)
+        setTimeout(() => { setCopied(false) }, 500)
     }
 
     return (
