@@ -119,6 +119,54 @@ class UserController {
             return res.json(e.message);
         }
     }
+
+    // работа с тегами
+
+    async add_tags_group(req, res, next) {
+        try {
+            const { group_name } = req.body
+            let pool = await sql.connect(sqlConfig)
+
+            let search_group_name = await pool.request()
+                .input('group_name', sql.VarChar, group_name)
+                .query('SELECT * FROM tags_group WHERE group_name = @group_name')
+            if (search_group_name.recordset.length > 0) return res.json({ message: "Такая группа уже существует!" })
+
+            await pool.request()
+                .input('group_name', sql.VarChar, group_name)
+                
+                .query('INSERT INTO tags_group (group_name)' +
+                    'VALUES (@group_name)')
+            return res.json({ message: "Группа добавлена!" })
+        } catch (e) {
+            return res.json(e.message);
+        }
+    }
+
+    async add_tag(req, res, next) {
+        try {
+            const { tag_name, group_id, tag_value1, tag_value2, tag_value3 } = req.body
+            let pool = await sql.connect(sqlConfig)
+
+            let search_tag = await pool.request()
+                .input('tag_name', sql.VarChar, tag_name)
+                .query('SELECT * FROM tags WHERE tag_name = @tag_name')
+            if (search_tag.recordset.length > 0) return res.json({ message: "Тег с таким названием уже существует!" })
+
+            await pool.request()
+                .input('tag_name', sql.VarChar, tag_name)
+                .input('group_id', sql.VarChar, group_id)
+                .input('tag_value1', sql.VarChar, tag_value1)
+                .input('tag_value2', sql.VarChar, tag_value2)
+                .input('tag_value3', sql.VarChar, tag_value3)
+                
+                .query('INSERT INTO tags (tag_name, group_id, tag_value1, tag_value2, tag_value3)' +
+                    'VALUES (@tag_name, @group_id, @tag_value1, @tag_value2, @tag_value3)')
+            return res.json({ message: "Тег добавлен!" })
+        } catch (e) {
+            return res.json(e.message);
+        }
+    }
 }
 
 module.exports = new UserController()
