@@ -75,13 +75,13 @@ class AdminController {
 
             let search_group_name = await pool.request()
                 .input('group_name', sql.VarChar, group_name)
-                .query('SELECT * FROM tags_group WHERE group_name = @group_name')
+                .query('SELECT * FROM tags_groups WHERE group_name = @group_name')
             if (search_group_name.recordset.length > 0) return res.json({ message: "Такая группа уже существует!" })
 
             await pool.request()
                 .input('group_name', sql.VarChar, group_name)
                 
-                .query('INSERT INTO tags_group (group_name)' +
+                .query('INSERT INTO tags_groups (group_name)' +
                     'VALUES (@group_name)')
             return res.json({ message: "Группа добавлена!" })
         } catch (e) {

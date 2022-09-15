@@ -2,12 +2,14 @@ import { combineReducers } from "redux";
 import { userReducer } from './userReducer';
 import { usersReducer } from './usersReducer';
 import { clientsReducer } from './clientsReducer';
+import { tagsReducer } from './tagsReducer';
 
 
 export const  rootReducer = combineReducers({
     user: userReducer,
     users: usersReducer,
-    clients: clientsReducer
+    clients: clientsReducer,
+    tags: tagsReducer
     
 })
 

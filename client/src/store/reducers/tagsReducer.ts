@@ -1,7 +1,7 @@
 import { TagsInitialState } from '../initialState';
 import { ITagsAction, TagsActionTypes, ITagsState } from '../../types/tagsTypes';
 
-export const TagsReducer = (state = TagsInitialState, action: ITagsAction): ITagsState => {
+export const tagsReducer = (state = TagsInitialState, action: ITagsAction): ITagsState => {
     switch (action.type){
         case TagsActionTypes.FETCH_TAGS:
             return {...state, loading: true}
