@@ -6,6 +6,7 @@ import SlavePage from './pages/slave/SlavePage';
 import LoginPage from './pages/login/LoginPage';
 import UsersPage from './pages/users/UsersPage';
 import OrgAddPage from './pages/orgAdd/OrgAddPage';
+import TagsPage from './pages/tags/TagsPage';
 
 interface IRoutes{
     path: string,
@@ -28,6 +29,10 @@ export const adminRoutes: IRoutes[] = [
     {
         path: routes.ORG_ADD_ROUTE,
         Component: OrgAddPage
+    },
+    {
+        path: routes.TAGS_ROUTE,
+        Component: TagsPage
     }
 ]
 
@@ -39,6 +44,10 @@ export const slaveRoutes: IRoutes[] = [
     {
         path: routes.ORG_ADD_ROUTE,
         Component: OrgAddPage
+    },
+    {
+        path: routes.TAGS_ROUTE,
+        Component: TagsPage
     }
 ]
 
