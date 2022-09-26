@@ -125,3 +125,13 @@ table td {
     margin-top: 10px;
     height: 50px;
 }
+
+.input{
+    border: 2px black solid;
+    height: 30px;
+    padding: 4px;
+    &:focus{
+        outline: none;
+        // border: 3px black solid;
+    }
+}
