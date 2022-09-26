@@ -18,7 +18,7 @@ const CopiedText: React.FC<any> = ({text}) => {
                 copied ?
                 <p>Скопировано!</p>
                 :
-                <p className='cursor-pointer hover:underline decoration-dashed' onClick={() => copy(text)}>{text}</p>
+                <p className='cursor-pointer hover:underline decoration-dashed select-none' onClick={() => copy(text)}>{text}</p>
             }
         </div>
     );

@@ -69,7 +69,8 @@ const UsersPage = () => {
                             {
                                 u.login !== 'admin' && u.login !== 'slave' && u.login !== currentUserLogin &&
                                 <div onClick={startDeleteUser.bind(this, u.login)} className='hover:cursor-pointer hover:text-[#ff1919]'> Удалить </div>
-                            }</td>
+                            }
+                        </td>
                     </tr>
                     )}
                 </tbody>

@@ -133,6 +133,20 @@ class UserController {
             return res.json(e.message);
         }
     }
+
+    async get_tags_groups(req, res, next) {
+        try {
+            let pool = await sql.connect(sqlConfig)
+            let tags_groups = await pool.request()
+                .query('SELECT * FROM tags_groups')
+
+            if (tags_groups.recordset.length == 0) return next(ApiError.internal('Ни одной группы тегов не найдено!'))
+
+            return res.json(tags_groups.recordset)
+        } catch (e) {
+            return res.json(e.message);
+        }
+    }
 }
 
 module.exports = new UserController()

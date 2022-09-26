@@ -10,9 +10,8 @@ const AdminPage = () => {
 
     const { clients, loading, error } = useTypedSelector(state => state.clients)
     const currentUserLogin = useTypedSelector(state => state.user.login)
-    const { unsetUser, fetchClients } = useActions()
+    const { unsetUser, fetchClients,fetchTags } = useActions()
     const clipboard = useClipboard()
-    const [anydeskCopy, setAnydeskCopy] = useState(false)
 
     const logOut = () => {
         unsetUser()
@@ -26,16 +25,25 @@ const AdminPage = () => {
 
     useEffect(() => {
         fetchClients()
+        fetchTags()
     }, [])
 
+    if (loading) {
+        return <h1 className='centerContainer h-screen text-2xl'>Идет загрузка...</h1>
+    }
+
+    if (error) {
+        return <h1>{error}</h1>
+    }
     return (
         <div className={s.container}>
 
             <p className='text-[20px]'>Добро пожаловать, {currentUserLogin}!</p>
-            <div className='headerContainer'>
+            <div className='headerContainer w-[75vw]'>
                 <NavLink to='/login' className='btn w-[90px] h-[30px]' onClick={logOut}>← Выйти</NavLink>
-                <div className='flex justify-between w-[330px]'>
+                <div className='flex justify-between w-[430px]'>
                     <NavLink className='linkBtn w-[200px]' to='/org_add'>Добавить организацию</NavLink>
+                    <NavLink className='linkBtn w-[80px]' to='/tags'>Теги</NavLink>
                     <NavLink className='linkBtn w-[120px]' to='/users'>Пользователи</NavLink>
                 </div>
             </div>
@@ -54,7 +62,6 @@ const AdminPage = () => {
                 <tbody>
                     {clients.map(c => <tr key={c.org_id}>
                         <td className={s.tableTd + ' w-[280px]'} data-th="Название организации">{c.org_name}</td>
-                        {/* <td className={s.tableTd + ' w-[150px]'} data-th="AnyDesk" onClick={() => copy(c.anydesk, setAnydeskCopy)}>{c.anydesk}</td> */}
                         <td className={s.tableTd + ' w-[150px]'} data-th="AnyDesk" ><CopiedText text={c.anydesk}/></td>
                         <td className={s.tableTd} data-th="RDP">{c.rdp}</td>
                         <td className={s.tableTd + ' w-[180px]'} data-th="Пароль sa">{c.sa_password}</td>

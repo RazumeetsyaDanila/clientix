@@ -14,3 +14,15 @@ export const fetchTags = () => {
         }
     }
 }
+
+export const fetchTagsGroups = () => {
+    return async (dispatch: Dispatch<ITagsAction>) => {
+        try {
+            dispatch({ type: TagsActionTypes.FETCH_TAGS_GROUPS })
+            const { data } = await $authHost.get('api/user/get_tags_groups')
+            dispatch({ type: TagsActionTypes.FETCH_TAGS_GROUPS_SUCCESS, payload: data })
+        } catch (e) {
+            dispatch({ type: TagsActionTypes.FETCH_TAGS_GROUPS_ERROR, payload: 'Ошибка при загрузке списка групп тегов!' })
+        }
+    }
+}

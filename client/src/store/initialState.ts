@@ -18,6 +18,7 @@ export const UsersInitialState: IUsersState = {
 
 export const TagsInitialState: ITagsState = {
     tags: [],
+    tagsGroups: [],
     loading: false,
     error: null
 }
