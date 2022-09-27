@@ -7,6 +7,7 @@ import LoginPage from './pages/login/LoginPage';
 import UsersPage from './pages/users/UsersPage';
 import OrgAddPage from './pages/orgAdd/OrgAddPage';
 import TagsPage from './pages/tags/TagsPage';
+import TagAddPage from './pages/tagAdd/TagAddPage';
 
 interface IRoutes{
     path: string,
@@ -33,7 +34,11 @@ export const adminRoutes: IRoutes[] = [
     {
         path: routes.TAGS_ROUTE,
         Component: TagsPage
-    }
+    },
+    {
+        path: routes.TAGS_ADD_ROUTE,
+        Component: TagAddPage
+    },
 ]
 
 export const slaveRoutes: IRoutes[] = [

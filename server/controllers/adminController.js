@@ -126,6 +126,23 @@ class AdminController {
             return res.json(e.message);
         }
     }
+
+    async update_tag(req, res, next) {
+        try {
+            const { new_tag_name, old_tag_name, tag_value1, tag_value2, tag_value3 } = req.body
+            let pool = await sql.connect(sqlConfig)
+            await pool.request()
+                .input('old_tag_name', sql.VarChar, old_tag_name)
+                .input('new_tag_name', sql.VarChar, new_tag_name)
+                .input('tag_value1', sql.VarChar, tag_value1)
+                .input('tag_value2', sql.VarChar, tag_value2)
+                .input('tag_value3', sql.VarChar, tag_value3)
+                .query('UPDATE tags SET tag_name = @new_tag_name, tag_value1 = @tag_value1, tag_value2 = @tag_value2, tag_value3 = @tag_value3 WHERE tag_name = @old_tag_name')
+            return res.json({ message: "Тег изменен!" })
+        } catch (e) {
+            return res.json(e.message);
+        }
+    }
 }
 
 module.exports = new AdminController()

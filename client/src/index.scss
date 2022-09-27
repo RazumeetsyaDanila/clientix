@@ -88,6 +88,19 @@ table td {
 		color: black;
 	}
 }
+.redBtn{
+	background-color: darkred;
+	border: 2px darkred solid;
+	color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+    cursor: pointer;
+	&:hover{
+		background-color: white;
+		color: darkred;
+	}
+}
 
 .linkBtn{
 	// width: 100px;
