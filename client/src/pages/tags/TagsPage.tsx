@@ -15,6 +15,9 @@ const TagsPage = () => {
     const [textFilter, setTextFilter] = useState('')
 
     const [editTagModal, setEditTagModal] = useState(false)
+    const [editTagSuccessModal, setEditTagSuccessModal] = useState(false)
+
+    const [deleteConfirmModal, setDeleteConfirmModal] = useState(false)
     const [oldTagName, setOldTagName] = useState('')
     const [editTagName, setEditTagName] = useState('')
     const [editTagValue1, setEditTagValue1] = useState('')
@@ -25,6 +28,10 @@ const TagsPage = () => {
         fetchTags()
         fetchTagsGroups()
     }, [])
+
+    useEffect(() => {
+        setCurrentTags(tags)
+    }, [tags])
 
     useEffect(() => {
         if (currentTagsGroup != 0) {
@@ -46,9 +53,9 @@ const TagsPage = () => {
 
     const applyEdit = () => {
         update_tag( oldTagName, editTagName, editTagValue1, editTagValue2, editTagValue3)
-        setEditTagModal(false)
         fetchTags()
-        setCurrentTags(tags)
+        setEditTagModal(false)
+        setEditTagSuccessModal(true)
     }
 
     const refresh = () => {
@@ -56,18 +63,23 @@ const TagsPage = () => {
         setCurrentTags(tags)
     }
 
-    const startDeleteTag = (name: string) => {
-        delete_tag(name)
+    const startDeleteTag = (name: string) => {        
         setEditTagModal(false)
+        setDeleteConfirmModal(true)        
+    }
+
+    const deleteTag = () => {
+        delete_tag(editTagName)
         fetchTags()
-        setCurrentTags(tags)
+        setDeleteConfirmModal(false)
     }
 
     if (loading) return <h1 className='centerContainer h-screen text-2xl'>Идет загрузка...</h1>
     if (error) return <h1 className='centerContainer h-screen text-2xl'>{error}</h1>
 
     return (
-        <div className='centerContainer mt-[40px]'>
+        <div className='centerContainer mt-[10px]'>
+            <p className='text-3xl select-none mb-[4px]'>Список тегов</p>
 
             <div className='headerContainer w-[950px]'>
                 {currentUserRole === 'admin' ? <NavLink to='/admin' className='btn w-[90px] h-[30px]'>← Назад</NavLink> : <NavLink to='/slave' className='btn w-[90px] h-[30px]'>← Назад</NavLink>}
@@ -100,12 +112,6 @@ const TagsPage = () => {
                             <td className='w-[260px]' data-th="Значение 1"><CopiedText text={t.tag_value1} /></td>
                             <td className='w-[260px]' data-th="Значение 2"><CopiedText text={t.tag_value2} /></td>
                             {/* <td className='w-[280px]' data-th="Значение 3"><CopiedText text={t.tag_value3} /></td> */}
-                            {/* <td data-th="Удалить">
-                            {
-                                u.login !== 'admin' && u.login !== 'slave' && u.login !== currentUserLogin &&
-                                <div onClick={startDeleteUser.bind(this, u.login)} className='hover:cursor-pointer hover:text-[#ff1919]'> Удалить </div>
-                            }
-                        </td> */}
                         </tr>
                         )}
                 </tbody>
@@ -119,6 +125,23 @@ const TagsPage = () => {
                     <input className='authInput' type="text" placeholder="Значение 2" value={editTagValue2} onChange={e => setEditTagValue2(e.target.value)} />
                     <button className='btn w-[300px] h-[40px] mb-[10px]' onClick={applyEdit}>Применить изменения</button>
                     <button className='redBtn w-[300px] h-[40px]' onClick={() => startDeleteTag(editTagName)}>Удалить</button>
+                </div>
+            </Modal>
+
+            <Modal visible={deleteConfirmModal} setVisible={setDeleteConfirmModal}>
+                <div className='flex flex-col items-center'>
+                    <p className='mb-[20px]'>Удалить?</p>
+                    <div className='flex justify-between w-[200px]'>
+                        <button className='btn w-[60px] h-[30px]' onClick={deleteTag}>Да</button>
+                        <button className='btn w-[60px] h-[30px]' onClick={() => setDeleteConfirmModal(false)}>Нет</button>
+                    </div>
+                </div>
+            </Modal>
+
+            <Modal visible={editTagSuccessModal} setVisible={setEditTagSuccessModal}>
+                <div className='flex flex-col items-center'>
+                    <p className='mb-[10px]'>Изменения сохранены!</p>
+                    <button className='btn w-[60px] h-[30px]' onClick={() => setEditTagSuccessModal(false)}>ОК</button>
                 </div>
             </Modal>
         </div>
