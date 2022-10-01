@@ -15,6 +15,7 @@
     "axios": "^0.27.2",
     "dotenv": "^16.0.1",
     "jwt-decode": "^3.1.2",
+    "node-cmd": "^5.0.0",
     "node-sass": "^7.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

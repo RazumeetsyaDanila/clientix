@@ -8,6 +8,7 @@ import UsersPage from './pages/users/UsersPage';
 import OrgAddPage from './pages/orgAdd/OrgAddPage';
 import TagsPage from './pages/tags/TagsPage';
 import TagAddPage from './pages/tagAdd/TagAddPage';
+import OrgPage from './pages/org/OrgPage';
 
 interface IRoutes{
     path: string,
@@ -38,6 +39,10 @@ export const adminRoutes: IRoutes[] = [
     {
         path: routes.TAGS_ADD_ROUTE,
         Component: TagAddPage
+    },
+    {
+        path: routes.ORG_ROUTE,
+        Component: OrgPage
     },
 ]
 

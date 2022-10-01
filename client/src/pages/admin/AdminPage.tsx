@@ -39,7 +39,7 @@ const AdminPage = () => {
         <div className={s.container}>
 
             <p className='text-[20px]'>Добро пожаловать, {currentUserLogin}!</p>
-            <div className='headerContainer w-[75vw]'>
+            <div className='headerContainer w-[600px]'>
                 <NavLink to='/login' className='btn w-[90px] h-[30px]' onClick={logOut}>← Выйти</NavLink>
                 <div className='flex justify-between w-[430px]'>
                     <NavLink className='linkBtn w-[200px]' to='/org_add'>Добавить организацию</NavLink>
@@ -48,30 +48,17 @@ const AdminPage = () => {
                 </div>
             </div>
 
-            <table className='w-[75vw]'>
+            <table className='w-[600px]'>
                 <thead>
                     <tr>
-                        <th>Название организации</th>
-                        <th>AnyDesk</th>
-                        <th>RDP</th>
-                        <th>Пароль sa</th>
-                        <th>Пароль в Симеде</th>
-                        <th>Кнопки управления</th>
+                        <th className={s.tableTd + ' w-[300px]'}>Название организации</th>
+                        <th className={s.tableTd + ' w-[300px]'}>Удаленный доступ</th>
                     </tr>
                 </thead>
                 <tbody>
                     {clients.map(c => <tr key={c.org_id}>
-                        <td className={s.tableTd + ' w-[280px]'} data-th="Название организации">{c.org_name}</td>
-                        <td className={s.tableTd + ' w-[150px]'} data-th="AnyDesk" ><CopiedText text={c.anydesk}/></td>
-                        <td className={s.tableTd} data-th="RDP">{c.rdp}</td>
-                        <td className={s.tableTd + ' w-[180px]'} data-th="Пароль sa">{c.sa_password}</td>
-                        <td className={s.tableTd + ' w-[180px]'} data-th="Пароль в Симеде">{c.simed_admin_pass}</td>
-                        <td className={s.tableTd + ' w-[180px]'} data-th="Удалить">
-                            {/* {
-                                u.login !== 'admin' && u.login !== 'slave' && u.login !== currentUserLogin &&
-                                <div onClick={startDeleteUser.bind(this, u.login)} className='hover:cursor-pointer hover:text-[#ff1919]'> Удалить </div>
-                            } */}
-                        </td>
+                        <td className={s.tableTd + ' w-[300px]'} data-th="Название организации"> <NavLink to={'/org/' + c.org_id}>{c.org_name}</NavLink></td>
+                        <td className={s.tableTd + ' w-[300px]'} data-th="Удаленный доступ">{c.remote_access}</td>
                     </tr>
                     )}
                 </tbody>

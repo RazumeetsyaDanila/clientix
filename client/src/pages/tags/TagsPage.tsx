@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect,useLayoutEffect, useState } from 'react';
 import { useActions } from '../../hooks/useActions';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { NavLink } from 'react-router-dom';
@@ -29,7 +29,7 @@ const TagsPage = () => {
         fetchTagsGroups()
     }, [])
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         setCurrentTags(tags)
     }, [tags])
 
@@ -53,7 +53,7 @@ const TagsPage = () => {
 
     const applyEdit = () => {
         update_tag( oldTagName, editTagName, editTagValue1, editTagValue2, editTagValue3)
-        fetchTags()
+        // fetchTags()
         setEditTagModal(false)
         setEditTagSuccessModal(true)
     }
@@ -70,7 +70,7 @@ const TagsPage = () => {
 
     const deleteTag = () => {
         delete_tag(editTagName)
-        fetchTags()
+        // fetchTags()
         setDeleteConfirmModal(false)
     }
 

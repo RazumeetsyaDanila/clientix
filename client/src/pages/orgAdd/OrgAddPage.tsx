@@ -29,16 +29,15 @@ const OrgAddPage = () => {
 
     return (
         <div className='centerContainer h-screen'>
-            org add page
+            
+            <p className='text-2xl mb-[10px]'>Добавить организацию</p>
 
-            <input className='authInput' type="text" placeholder="orgName" value={orgName} onChange={e => setOrgName(e.target.value)} />
-            <input className='authInput' type="text" placeholder="anydesk" value={anydesk} onChange={e => setAnydesk(e.target.value)} />
-            <input className='authInput' type="text" placeholder="sqlName" value={sqlName} onChange={e => setSqlName(e.target.value)} />
-            <input className='authInput' type="text" placeholder="rdp" value={rdp} onChange={e => setRdp(e.target.value)} />
-            <input className='authInput' type="text" placeholder="saPassword" value={saPassword} onChange={e => setSaPassword(e.target.value)} />
-            <input className='authInput' type="text" placeholder="mongoDb" value={mongoDb} onChange={e => setMongoDb(e.target.value)} />
-            <input className='authInput' type="text" placeholder="egisz" value={egisz} onChange={e => setEgisz(e.target.value)} />
-            <input className='authInput' type="text" placeholder="simedAdminPass" value={simedAdminPass} onChange={e => setSimedAdminPass(e.target.value)} />
+            <input className='authInput' type="text" placeholder="Наименование" value={orgName} onChange={e => setOrgName(e.target.value)} />
+            <input className='authInput' type="text" placeholder="Имя SQL сервера" value={sqlName} onChange={e => setSqlName(e.target.value)} />
+            <input className='authInput' type="text" placeholder="Пароль SA" value={saPassword} onChange={e => setSaPassword(e.target.value)} />
+            <input className='authInput' type="text" placeholder="MongoDb" value={mongoDb} onChange={e => setMongoDb(e.target.value)} />
+            <input className='authInput' type="text" placeholder="ЕГИСЗ" value={egisz} onChange={e => setEgisz(e.target.value)} />
+            <input className='authInput' type="text" placeholder="Пароль от админа в Симеде" value={simedAdminPass} onChange={e => setSimedAdminPass(e.target.value)} />
 
             <button className='authButton' onClick={orgAdd} >Добавить</button>
         </div>
