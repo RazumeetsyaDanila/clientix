@@ -27,8 +27,8 @@ const AppRouter: React.FC = () => {
                 <Route key={path} path={path} element={<Component />} />
             )}
 
-            {/* {!checkPath && <Route path="*" element={<Navigate to={routes.LOGIN_ROUTE} />} />} */}
-            {<Route path="*" element={<Navigate to={routes.LOGIN_ROUTE} />} />}
+            {!checkPath && <Route path="*" element={<Navigate to={routes.LOGIN_ROUTE} />} />}
+            {/* {<Route path="*" element={<Navigate to={routes.LOGIN_ROUTE} />} />} */}
         </Routes>
     );
 };

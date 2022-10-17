@@ -33,7 +33,7 @@ const AdminPage = () => {
     }
 
     if (error) {
-        return <h1>{error}</h1>
+        return <h1>{error}<NavLink to='/login' className='btn w-[420px] h-[40px]'>Вернуться на страницу авторизации</NavLink></h1>
     }
     return (
         <div className={s.container}>
@@ -63,7 +63,9 @@ const AdminPage = () => {
                     )}
                 </tbody>
             </table>
-
+            <NavLink to='/files/cert_export_CA.sokolmed.itl-service.ru.p12' target="_blank" download> скачать сертификат соколмед</NavLink>
+            <NavLink to='/files/cert_export_CA.sokolmed.itl-service.ru.p12' target="_blank"> скачать сертификат соколмед</NavLink>
+            <p>test</p>
 
 
 

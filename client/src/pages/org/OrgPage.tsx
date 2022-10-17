@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, NavLink } from 'react-router-dom';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 
 const OrgPage = () => {
@@ -18,7 +18,10 @@ const OrgPage = () => {
     return (
         <div className='centerContainer h-screen text-3xl'>
             <p>Организация № {orgId}</p> 
-            <p>Название: {currentOrg.org_name}</p>
+            <p className='mb-[30px]'>Название: {currentOrg.org_name}</p>
+            <NavLink to='/files/cert_export_CA.sokolmed.itl-service.ru.p12' target="_blank" download> скачать сертификат соколмед</NavLink>
+            <NavLink to='/files/rdp-cdt2.bat' target="_blank" download> скачать батник rdp-cdt2.bat </NavLink>
+            <NavLink to='/files/rdp-ldc2.bat' target="_blank" download> скачать батник rdp-ldc2.bat </NavLink>
         </div>
     );
 };

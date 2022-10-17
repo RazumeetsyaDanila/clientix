@@ -75,7 +75,7 @@ const TagsPage = () => {
     }
 
     if (loading) return <h1 className='centerContainer h-screen text-2xl'>Идет загрузка...</h1>
-    if (error) return <h1 className='centerContainer h-screen text-2xl'>{error}</h1>
+    if (error) return <h1 className='centerContainer h-screen text-2xl'>{error}<NavLink to='/login' className='btn w-[420px] h-[40px]'>Вернуться на страницу авторизации</NavLink></h1>
 
     return (
         <div className='centerContainer mt-[10px]'>
