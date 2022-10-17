@@ -9,6 +9,7 @@ import CopiedText from './../../components/UI/copiedText/CopiedText';
 const AdminPage = () => {
 
     const { clients, loading, error } = useTypedSelector(state => state.clients)
+    const { isAuth } = useTypedSelector(state => state.user)
     const currentUserLogin = useTypedSelector(state => state.user.login)
     const { unsetUser, fetchClients,fetchTags } = useActions()
     const clipboard = useClipboard()
@@ -31,6 +32,12 @@ const AdminPage = () => {
     if (loading) {
         return <h1 className='centerContainer h-screen text-2xl'>Идет загрузка...</h1>
     }
+
+    
+    if (!isAuth) return <div className='centerContainer h-screen'>
+        <h1 className='text-[26px] mb-[10px]'>Время авторизации закончилось</h1>
+        <NavLink to='/login' className='btn w-[420px] h-[40px]'>Вернуться на страницу авторизации</NavLink>
+    </div>
 
     if (error) {
         return <h1>{error}<NavLink to='/login' className='btn w-[420px] h-[40px]'>Вернуться на страницу авторизации</NavLink></h1>

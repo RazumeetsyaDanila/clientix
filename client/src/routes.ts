@@ -9,6 +9,7 @@ import OrgAddPage from './pages/orgAdd/OrgAddPage';
 import TagsPage from './pages/tags/TagsPage';
 import TagAddPage from './pages/tagAdd/TagAddPage';
 import OrgPage from './pages/org/OrgPage';
+import Reauth from './pages/reauth/Reauth';
 
 interface IRoutes{
     path: string,
@@ -65,5 +66,9 @@ export const publicRoutes: IRoutes[] = [
     {
         path: routes.LOGIN_ROUTE,
         Component: LoginPage
+    },
+    {
+        path: routes.REAUTH_ROUTE,
+        Component: Reauth
     }
 ]
