@@ -81,11 +81,11 @@ const TagsPage = () => {
         <div className='centerContainer mt-[10px]'>
             <p className='text-3xl select-none mb-[4px]'>Список тегов</p>
 
-            <div className='headerContainer w-[950px]'>
+            <div className='headerContainer w-[1010px]'>
                 {currentUserRole === 'admin' ? <NavLink to='/admin' className='btn w-[90px] h-[30px]'>← Назад</NavLink> : <NavLink to='/slave' className='btn w-[90px] h-[30px]'>← Назад</NavLink>}
                 <div className='flex'>
                     <input placeholder='Поиск по наименованию' className='input w-[196px] mr-[10px]' type="text" value={textFilter} onChange={e => setTextFilter(e.target.value)} />
-                    <select className='btn w-[230px] h-[30px]' onChange={e => filterTags(e)} >
+                    <select className='btn w-[230px] h-[30px] pl-[10px]' onChange={e => filterTags(e)} >
                         <option value={0}>Все</option>
                         {tagsGroups.map(t => <option key={t.group_id} value={t.group_id}>{t.group_name}</option>)}
                     </select>
@@ -98,7 +98,7 @@ const TagsPage = () => {
             <table className='mt-[10px]'>
                 <thead>
                     <tr>
-                        <th className='w-[430px]'>Наименование</th>
+                        <th className='w-[490px]'>Наименование</th>
                         <th className='w-[260px]'>Значение 1</th>
                         <th className='w-[260px]'>Значение 2</th>
                         {/* <th className='w-[280px]'>Значение 3</th> */}
@@ -108,7 +108,7 @@ const TagsPage = () => {
                     {currentTags
                         .filter(t => t.tag_name.toLowerCase().includes(textFilter.toLowerCase()))
                         .map(t => <tr key={t.tag_name}>
-                            <td className='w-[430px]  hover:after:content-["_\270E"] cursor-pointer' data-th="Наименование" onClick={() => startEditTag(t.tag_name, t.tag_value1, t.tag_value2)}>{t.tag_name}</td>
+                            <td className='w-[490px]  hover:after:content-["_\270E"] cursor-pointer' data-th="Наименование" onClick={() => startEditTag(t.tag_name, t.tag_value1, t.tag_value2)}>{t.tag_name}</td>
                             <td className='w-[260px]' data-th="Значение 1"><CopiedText text={t.tag_value1} /></td>
                             <td className='w-[260px]' data-th="Значение 2"><CopiedText text={t.tag_value2} /></td>
                             {/* <td className='w-[280px]' data-th="Значение 3"><CopiedText text={t.tag_value3} /></td> */}

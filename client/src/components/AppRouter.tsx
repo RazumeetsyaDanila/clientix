@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Navigate, Route, Routes, NavLink } from 'react-router-dom';
 import { correct_routes, REACT_APP_URL, routes } from '../consts';
 import { useTypedSelector } from '../hooks/useTypedSelector';
@@ -8,9 +8,16 @@ const AppRouter: React.FC = () => {
 
     const { isAuth, role } = useTypedSelector(state => state.user)
     // костыль для проверки корректности текущего url, чтобы при некорректном перенаправлялось на страницу логина
+    
     let checkPath: boolean = false
     let current_path: string = window.location.href.replace(REACT_APP_URL, '')
     if (correct_routes.indexOf(current_path) !== -1) checkPath = true
+
+    
+
+    useEffect((): any => {
+        if(!isAuth && current_path == 'admin') return <p>kek</p>
+    }, [])
 
     return (
         <Routes>
@@ -27,7 +34,7 @@ const AppRouter: React.FC = () => {
             )}
 
             {!checkPath && <Route path="*" element={<Navigate to={routes.LOGIN_ROUTE} />} />}
-            {!isAuth && <Route path="*" element={<Navigate to={routes.REAUTH_ROUTE} />} />}
+            {/* {!isAuth && <Route path='*' element={<Navigate to={routes.REAUTH_ROUTE} />} />} */}
         </Routes>
     );
 };

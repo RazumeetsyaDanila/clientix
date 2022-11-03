@@ -3,7 +3,7 @@ const sqlConfig = {
     password: process.env.DB_PASSWORD,
     server: process.env.DB_HOST,
     database: process.env.DB_NAME,
-    // port: 49951,
+    port: 49951,
     // port: 49166,
     options: {
         trustServerCertificate: true,
