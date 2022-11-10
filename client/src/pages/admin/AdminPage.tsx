@@ -46,7 +46,7 @@ const AdminPage = () => {
         <div className={s.container}>
 
             <p className='text-[20px]'>Добро пожаловать, {currentUserLogin}!</p>
-            <div className='headerContainer w-[600px]'>
+            <div className='headerContainer w-[1100px]'>
                 <NavLink to='/login' className='btn w-[90px] h-[30px]' onClick={logOut}>← Выйти</NavLink>
                 <div className='flex justify-between w-[430px]'>
                     <NavLink className='linkBtn w-[200px]' to='/org_add'>Добавить организацию</NavLink>
@@ -55,24 +55,30 @@ const AdminPage = () => {
                 </div>
             </div>
 
-            <table className='w-[600px]'>
+            <table className='w-[1100px]'>
                 <thead>
                     <tr>
-                        <th className={s.tableTd + ' w-[300px]'}>Название организации</th>
-                        <th className={s.tableTd + ' w-[300px]'}>Удаленный доступ</th>
+                        <th className={s.tableTd + ' w-[430px]'}>Название организации</th>
+                        <th className={s.tableTd + ' w-[300px]'}>Пароль админа</th>
+                        <th className={s.tableTd + ' w-[170px]'}>Удаленный доступ</th>
+                        <th className={s.tableTd + ' w-[200px]'}>Город</th>
+                        {/* <th className={s.tableTd + ' w-[200px]'}>Комментарий</th> */}
                     </tr>
                 </thead>
                 <tbody>
                     {clients.map(c => <tr key={c.org_id}>
-                        <td className={s.tableTd + ' w-[300px]'} data-th="Название организации"> <NavLink to={'/org/' + c.org_id}>{c.org_name}</NavLink></td>
-                        <td className={s.tableTd + ' w-[300px]'} data-th="Удаленный доступ">{c.remote_access}</td>
+                        <td className={s.tableTd + ' w-[430px]'} data-th="Название организации"> <NavLink to={'/org/' + c.org_id}>{c.org_name}</NavLink></td>
+                        <td className={s.tableTd + ' w-[300px]'} data-th="Пароль админа">{c.simed_admin_pass}</td>
+                        <td className={s.tableTd + ' w-[170px]'} data-th="Удаленный доступ">{c.remote_access}</td>
+                        <td className={s.tableTd + ' w-[200px]'} data-th="Город">{c.city}</td>
+                        {/* <td className={s.tableTd + ' w-[200px]'} data-th="Комментарий">{c.comment}</td> */}
                     </tr>
                     )}
                 </tbody>
             </table>
-            <NavLink to='/files/cert_export_CA.sokolmed.itl-service.ru.p12' target="_blank" download> скачать сертификат соколмед</NavLink>
+            {/* <NavLink to='/files/cert_export_CA.sokolmed.itl-service.ru.p12' target="_blank" download> скачать сертификат соколмед</NavLink>
             <NavLink to='/files/cert_export_CA.sokolmed.itl-service.ru.p12' target="_blank"> скачать сертификат соколмед</NavLink>
-            <p>test</p>
+            <p>test</p> */}
 
 
 

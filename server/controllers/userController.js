@@ -43,7 +43,7 @@ class UserController {
         try {
             let pool = await sql.connect(sqlConfig)
             let organizations = await pool.request()
-                .query('SELECT org_id, org_name, remote_access FROM organizations')
+                .query('SELECT org_id, org_name,simed_admin_pass ,remote_access, comment, city FROM organizations')
 
             if (organizations.recordset.length == 0) return next(ApiError.internal('Ни одной организации не найдено'))
 
@@ -55,7 +55,7 @@ class UserController {
 
     async add_org(req, res, next) {
         try {
-            const { org_name, anydesk, sql_name, rdp, sa_password, mongo_db, simed_admin_pass, egisz, smsc_login, smsc_pass, dadata } = req.body
+            const { org_name, simed_admin_pass, remote_access, city, comment } = req.body
             let pool = await sql.connect(sqlConfig)
 
             let search_org = await pool.request()
@@ -64,22 +64,13 @@ class UserController {
             if (search_org.recordset.length > 0) return res.json({ message: "Организация с таким именем уже существует!" })
 
             await pool.request()
-                .input('org_id', sql.Int, org_id)
                 .input('org_name', sql.VarChar, org_name)
-                .input('sql_name', sql.VarChar, sql_name)
-                .input('sa_password', sql.VarChar, sa_password)
-                .input('mongo_db', sql.VarChar, mongo_db)
                 .input('simed_admin_pass', sql.VarChar, simed_admin_pass)
-                .input('egisz', sql.VarChar, egisz)
-                .input('smsc_login', sql.VarChar, smsc_login)
-                .input('smsc_pass', sql.VarChar, smsc_pass)
-                .input('dadata', sql.VarChar, dadata)
                 .input('remote_access', sql.VarChar, remote_access)
                 .input('city', sql.VarChar, city)
-                .input('backup', sql.VarChar, backup)
                 .input('comment', sql.VarChar, comment)
-                .query('INSERT INTO organizations (org_name, sql_name, sa_password, mongo_db, simed_admin_pass, egisz, smsc_login, smsc_pass, dadata, remote_access, city, backup, comment)' +
-                    'VALUES (@org_name, @sql_name, @sa_password, @mongo_db, @simed_admin_pass, @egisz, @smsc_login, @smsc_pass, @dadata, @remote_access, @city, @backup, @comment)')
+                .query('INSERT INTO organizations (org_name, simed_admin_pass, remote_access, city, comment)' +
+                    'VALUES (@org_name, @simed_admin_pass, @remote_access, @city, @comment)')
             return res.json({ message: "Организация добавлена!" })
         } catch (e) {
             return res.json(e.message);
@@ -93,21 +84,13 @@ class UserController {
             await pool.request()
                 .input('org_id', sql.Int, org_id)
                 .input('org_name', sql.VarChar, org_name)
-                .input('sql_name', sql.VarChar, sql_name)
-                .input('sa_password', sql.VarChar, sa_password)
-                .input('mongo_db', sql.VarChar, mongo_db)
                 .input('simed_admin_pass', sql.VarChar, simed_admin_pass)
-                .input('egisz', sql.VarChar, egisz)
-                .input('smsc_login', sql.VarChar, smsc_login)
-                .input('smsc_pass', sql.VarChar, smsc_pass)
-                .input('dadata', sql.VarChar, dadata)
                 .input('remote_access', sql.VarChar, remote_access)
                 .input('city', sql.VarChar, city)
-                .input('backup', sql.VarChar, backup)
                 .input('comment', sql.VarChar, comment)
-                .query('UPDATE organizations SET org_name = @org_name, sql_name = @sql_name, sa_password = @sa_password,' +
-                    'comment = @comment, backup = @backup, city = @city, remote_access = @remote_access' +
-                    'mongo_db = @mongo_db, simed_admin_pass = @simed_admin_pass, egisz = @egisz, smsc_login = @smsc_login, smsc_pass = @smsc_pass, dadata = @dadata ' +
+                .query('UPDATE organizations SET org_name = @org_name, ' +
+                    'comment = @comment, city = @city, remote_access = @remote_access, ' +
+                    'simed_admin_pass = @simed_admin_pass, ' +
                     'WHERE org_id = @org_id')
             return res.json({ message: "Организация обновлена!" })
         } catch (e) {
