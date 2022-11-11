@@ -55,6 +55,22 @@ table td {
     }
 }
 
+.bigAuthInput {
+    height: 120px;
+    width: 300px;
+    margin-bottom: 10px;
+    font-size: 18px;
+    padding-left: 10px;
+    padding-top: 10px;
+    border: 2px solid black;
+    resize: none;
+    &:focus {
+        background-color: transparent;
+        outline: none;
+        border: 2px solid black;
+    }
+}
+
 .authButton {
     width: 300px;
     height: 40px;

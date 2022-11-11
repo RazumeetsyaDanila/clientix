@@ -33,7 +33,7 @@ const OrgAddPage = () => {
             <input className='authInput' type="text" placeholder="Пароль от админа в Симеде" value={simedAdminPass} onChange={e => setSimedAdminPass(e.target.value)} />
             <input className='authInput' type="text" placeholder="Удаленный доступ" value={remoteAccess} onChange={e => setRemoteAccess(e.target.value)} />
             <input className='authInput' type="text" placeholder="Город" value={city} onChange={e => setCity(e.target.value)} />
-            <input className='authInput' type="text" placeholder="Комментарий" value={comment} onChange={e => setComment(e.target.value)} />
+            <textarea className='bigAuthInput'  placeholder="Комментарий" value={comment} onChange={e => setComment(e.target.value)} />
 
             <button className='authButton' onClick={orgAdd} >Добавить</button>
         </div>
