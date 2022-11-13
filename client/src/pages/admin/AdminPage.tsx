@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useLayoutEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import s from './adminPage.module.scss'
 import { useActions } from '../../hooks/useActions';
@@ -9,9 +9,11 @@ import CopiedText from './../../components/UI/copiedText/CopiedText';
 const AdminPage = () => {
 
     const { clients, loading, error } = useTypedSelector(state => state.clients)
+    const [currentClients, setCurrentClients] = useState(clients)
+    const [textFilter, setTextFilter] = useState('')
     const { isAuth } = useTypedSelector(state => state.user)
     const currentUserLogin = useTypedSelector(state => state.user.login)
-    const { unsetUser, fetchClients,fetchTags } = useActions()
+    const { unsetUser, fetchClients, fetchTags } = useActions()
     const clipboard = useClipboard()
 
     const logOut = () => {
@@ -29,11 +31,15 @@ const AdminPage = () => {
         fetchTags()
     }, [])
 
+    useLayoutEffect(() => {
+        setCurrentClients(clients)
+    }, [clients])
+
     if (loading) {
         return <h1 className='centerContainer h-screen text-2xl'>Идет загрузка...</h1>
     }
 
-    
+
     if (!isAuth) return <div className='centerContainer h-screen'>
         <h1 className='text-[26px] mb-[10px]'>Время авторизации закончилось</h1>
         <NavLink to='/login' className='btn w-[420px] h-[40px]'>Вернуться на страницу авторизации</NavLink>
@@ -48,6 +54,7 @@ const AdminPage = () => {
             <p className='text-[20px]'>Добро пожаловать, {currentUserLogin}!</p>
             <div className='headerContainer w-[1100px]'>
                 <NavLink to='/login' className='btn w-[90px] h-[30px]' onClick={logOut}>← Выйти</NavLink>
+                <input placeholder='Поиск по наименованию организации' className='input w-[296px] mr-[10px]' type="text" value={textFilter} onChange={e => setTextFilter(e.target.value)} />
                 <div className='flex justify-between w-[430px]'>
                     <NavLink className='linkBtn w-[200px]' to='/org_add'>Добавить организацию</NavLink>
                     <NavLink className='linkBtn w-[80px]' to='/tags'>Теги</NavLink>
@@ -66,14 +73,16 @@ const AdminPage = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {clients.map(c => <tr key={c.org_id}>
-                        <td className={s.tableTd + ' w-[430px]'} data-th="Название организации"> <NavLink to={'/org/' + c.org_id}>{c.org_name}</NavLink></td>
-                        <td className={s.tableTd + ' w-[300px]'} data-th="Пароль админа">{c.simed_admin_pass}</td>
-                        <td className={s.tableTd + ' w-[170px]'} data-th="Удаленный доступ">{c.remote_access}</td>
-                        <td className={s.tableTd + ' w-[200px]'} data-th="Город">{c.city}</td>
-                        {/* <td className={s.tableTd + ' w-[200px]'} data-th="Комментарий">{c.comment}</td> */}
-                    </tr>
-                    )}
+                    {currentClients
+                        .filter(c => c.org_name.toLowerCase().includes(textFilter.toLowerCase()))
+                        .map(c => <tr key={c.org_id}>
+                            <td className={s.tableTd + ' w-[430px]'} data-th="Название организации"> <NavLink to={'/org/' + c.org_id}>{c.org_name}</NavLink></td>
+                            <td className={s.tableTd + ' w-[300px]'} data-th="Пароль админа">{<CopiedText text={c.simed_admin_pass} />}</td>
+                            <td className={s.tableTd + ' w-[170px]'} data-th="Удаленный доступ">{c.remote_access}</td>
+                            <td className={s.tableTd + ' w-[200px]'} data-th="Город">{c.city}</td>
+                            {/* <td className={s.tableTd + ' w-[200px]'} data-th="Комментарий">{c.comment}</td> */}
+                        </tr>
+                        )}
                 </tbody>
             </table>
             {/* <NavLink to='/files/cert_export_CA.sokolmed.itl-service.ru.p12' target="_blank" download> скачать сертификат соколмед</NavLink>

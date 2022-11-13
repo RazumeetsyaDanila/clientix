@@ -78,12 +78,12 @@ const UsersPage = () => {
 
             <NavLink to='/registration'>
                 <div className={s.tempLinkBtn}>
-                    Registration
+                    Добавить
                 </div>
             </NavLink>
 
-            <NavLink to='/admin' className='btn w-[124px] h-[30px] backBtnPos'>
-                ← back to main
+            <NavLink to='/admin' className='btn w-[90px] h-[30px] backBtnPos'>
+                ← назад
             </NavLink>
 
             <ErrorModal visible={deleteModal} setVisible={setDeleteModal}>

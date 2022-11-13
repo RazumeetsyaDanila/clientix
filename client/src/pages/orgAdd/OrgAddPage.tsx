@@ -1,19 +1,19 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { org_add } from '../../http/clientsAPI';
 import { routes } from '../../consts';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate, NavLink } from 'react-router-dom';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 
 const OrgAddPage = () => {
     const [orgName, setOrgName] = useState('')
     const [simedAdminPass, setSimedAdminPass] = useState('')
-    const [remoteAccess, setRemoteAccess] = useState('')
+    const [remoteAccess, setRemoteAccess] = useState('нет')
     const [city, setCity] = useState('')
     const [comment, setComment] = useState('')
 
     const currentUserRole = useTypedSelector(state => state.user.role)
 
-    const navigate = useNavigate()  
+    const navigate = useNavigate()
 
     const orgAdd = async () => {
         try {
@@ -24,18 +24,30 @@ const OrgAddPage = () => {
         }
     }
 
+    const selectRemoteAccess = (e: any) => {
+        setRemoteAccess(e.target.value)
+    }
+
     return (
         <div className='centerContainer h-screen'>
-            
+
             <p className='text-2xl mb-[10px]'>Добавить организацию</p>
 
             <input className='authInput' type="text" placeholder="Наименование" value={orgName} onChange={e => setOrgName(e.target.value)} />
-            <input className='authInput' type="text" placeholder="Пароль от админа в Симеде" value={simedAdminPass} onChange={e => setSimedAdminPass(e.target.value)} />
-            <input className='authInput' type="text" placeholder="Удаленный доступ" value={remoteAccess} onChange={e => setRemoteAccess(e.target.value)} />
+            <input className='authInput' type="text" placeholder="Пароль от админа в Симеде" value={simedAdminPass} onChange={e => setSimedAdminPass(e.target.value)} />            
             <input className='authInput' type="text" placeholder="Город" value={city} onChange={e => setCity(e.target.value)} />
-            <textarea className='bigAuthInput'  placeholder="Комментарий" value={comment} onChange={e => setComment(e.target.value)} />
+            <select className='btn w-[300px] h-[40px] mb-[30px] pl-[8px]' onChange={e => selectRemoteAccess(e)} >
+                <option value={'нет'}>нет</option>
+                <option value={'anydesk'}>anydesk</option>
+                <option value={'rdp'}>rdp</option>
+            </select>
+            {/* <textarea className='bigAuthInput' placeholder="Комментарий" value={comment} onChange={e => setComment(e.target.value)} /> */}
 
             <button className='authButton' onClick={orgAdd} >Добавить</button>
+
+            <NavLink to='/admin' className='btn w-[90px] h-[30px] backBtnPos'>
+                ← назад
+            </NavLink>
         </div>
     );
 };
