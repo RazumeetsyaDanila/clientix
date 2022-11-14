@@ -98,18 +98,18 @@ class UserController {
         }
     }
 
-    async delete_org(req, res, next) {
-        try {
-            const { org_id } = req.body
-            let pool = await sql.connect(sqlConfig)
-            await pool.request()
-                .input('org_id', sql.Int, org_id)
-                .query('DELETE FROM organizations WHERE org_id = @org_id')
-            return res.json({ message: "Организация удалена!" })
-        } catch (e) {
-            return res.json(e.message);
-        }
-    }
+    // async delete_org(req, res, next) {
+    //     try {
+    //         const { org_id } = req.body
+    //         let pool = await sql.connect(sqlConfig)
+    //         await pool.request()
+    //             .input('org_id', sql.Int, org_id)
+    //             .query('DELETE FROM organizations WHERE org_id = @org_id')
+    //         return res.json({ message: "Организация удалена!" })
+    //     } catch (e) {
+    //         return res.json(e.message);
+    //     }
+    // }
     // работа с тегами
     async get_tags(req, res, next) {
         try {

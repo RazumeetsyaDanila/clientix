@@ -4,13 +4,13 @@ const jwt = require('jsonwebtoken')
 const sqlConfig = require('../db');
 const sql = require('mssql')
 
-const generateJwt = (user_id, login, role) => {
-    return jwt.sign(
-        { user_id, login, role },
-        process.env.SECRET_KEY,
-        { expiresIn: '24h' }
-    )
-}
+// const generateJwt = (user_id, login, role) => {
+//     return jwt.sign(
+//         { user_id, login, role },
+//         process.env.SECRET_KEY,
+//         { expiresIn: '24h' }
+//     )
+// }
 
 class AdminController {
 
@@ -139,6 +139,19 @@ class AdminController {
                 .input('tag_value3', sql.VarChar, tag_value3)
                 .query('UPDATE tags SET tag_name = @new_tag_name, tag_value1 = @tag_value1, tag_value2 = @tag_value2, tag_value3 = @tag_value3 WHERE tag_name = @old_tag_name')
             return res.json({ message: "Тег изменен!" })
+        } catch (e) {
+            return res.json(e.message);
+        }
+    }
+
+    async delete_org(req, res, next) {
+        try {
+            const { org_id } = req.body
+            let pool = await sql.connect(sqlConfig)
+            await pool.request()
+                .input('org_id', sql.Int, org_id)
+                .query('DELETE FROM organizations WHERE org_id = @org_id')
+            return res.json({ message: "Организация удалена!" })
         } catch (e) {
             return res.json(e.message);
         }

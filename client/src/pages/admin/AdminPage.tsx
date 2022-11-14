@@ -46,7 +46,7 @@ const AdminPage = () => {
     </div>
 
     if (error) {
-        return <h1>{error}<NavLink to='/login' className='btn w-[420px] h-[40px]'>Вернуться на страницу авторизации</NavLink></h1>
+        return <div className='centerContainer h-screen text-center'><h1>{error}<NavLink to='/login' className='btn w-[420px] h-[40px]'>Вернуться на страницу авторизации</NavLink></h1></div>
     }
     return (
         <div className={s.container}>

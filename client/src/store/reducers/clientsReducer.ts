@@ -6,7 +6,7 @@ export const clientsReducer = (state = ClientsInitialState, action: IClientsActi
         case ClientsActionTypes.FETCH_CLIENTS:
             return {...state, loading: true}
         case ClientsActionTypes.FETCH_CLIENTS_SUCCESS:
-            return {...state, loading: false, clients: action.payload}
+            return {...state, loading: false, clients: action.payload, error: ''}
         case ClientsActionTypes.FETCH_CLIENTS_ERROR:
             return {...state, loading: false, error: action.payload}
         default:

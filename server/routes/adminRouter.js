@@ -6,6 +6,7 @@ const checkRoleMiddleware = require('../middleware/checkRoleMiddleware')
 
 router.post('/registration',  adminController.registration)
 router.post('/delete_user', checkRoleMiddleware('admin'), adminController.delete_user)
+router.post('/delete_org', checkRoleMiddleware('admin'), adminController.delete_org)
 router.get('/get_users', checkRoleMiddleware('admin'), adminController.get_users)
 router.post('/delete_tag', checkRoleMiddleware('admin'), adminController.delete_tag)
 router.post('/update_tag', checkRoleMiddleware('admin'), adminController.update_tag)
