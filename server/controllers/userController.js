@@ -138,6 +138,73 @@ class UserController {
             return res.json(e.message);
         }
     }
+
+    async add_anydesk(req, res, next) {
+        try {
+            const { anydesk_id, org_id, anydesk_password } = req.body
+            let pool = await sql.connect(sqlConfig)
+
+            await pool.request()
+                .input('anydesk_id', sql.VarChar, anydesk_id)
+                .input('org_id', sql.Int, org_id)
+                .input('anydesk_password', sql.VarChar, anydesk_password)
+                .query('INSERT INTO anydesk (anydesk_id, org_id, anydesk_password)' +
+                    'VALUES (@anydesk_id, @org_id, @anydesk_password)')
+            return res.json({ message: "Anydesk добавлен!" })
+        } catch (e) {
+            return res.json(e.message);
+        }
+    }
+
+    async get_anydesk(req, res, next) {
+        try {
+            const { org_id } = req.body
+            let pool = await sql.connect(sqlConfig)
+
+            let anydesk = await pool.request()
+                .input('org_id', sql.Int, org_id)
+                .query('SELECT * FROM anydesk WHERE org_id = @org_id')
+            return res.json(anydesk.recordset)
+        } catch (e) {
+            return res.json(e.message);
+        }
+    }
+
+    async add_rdp(req, res, next) {
+        try {
+            const { org_id, vpn_ip, vpn_login, vpn_password, vpn_type, rdp_ip, rdp_login, rdp_password} = req.body
+            let pool = await sql.connect(sqlConfig)
+
+            await pool.request()
+                .input('org_id', sql.Int, org_id)
+                .input('vpn_ip', sql.VarChar, vpn_ip)
+                .input('vpn_login', sql.VarChar, vpn_login)
+                .input('vpn_password', sql.VarChar, vpn_password)
+                .input('vpn_type', sql.VarChar, vpn_type)
+                .input('rdp_ip', sql.VarChar, rdp_ip)
+                .input('rdp_login', sql.VarChar, rdp_login)
+                .input('rdp_password', sql.VarChar, rdp_password)
+                .query('INSERT INTO anydesk (org_id, vpn_ip, vpn_login, vpn_password, vpn_type, rdp_ip, rdp_login, rdp_password)' +
+                    'VALUES (@org_id, @vpn_ip, @vpn_login, @vpn_password, @vpn_type, @rdp_ip, @rdp_login, @rdp_password)')
+            return res.json({ message: "rdp добавлен!" })
+        } catch (e) {
+            return res.json(e.message);
+        }
+    }
+
+    async get_rdp(req, res, next) {
+        try {
+            const { org_id } = req.body
+            let pool = await sql.connect(sqlConfig)
+
+            let rdp = await pool.request()
+                .input('org_id', sql.Int, org_id)
+                .query('SELECT * FROM rdp WHERE org_id = @org_id')
+            return res.json(rdp.recordset)
+        } catch (e) {
+            return res.json(e.message);
+        }
+    }
 }
 
 module.exports = new UserController()
