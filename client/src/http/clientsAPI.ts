@@ -1,8 +1,8 @@
 import {$authHost} from "./index";
 
 export const org_add = async (org_name: string, simed_admin_pass: string, remote_access: string,  city: string, comment: string,) => {
-    await $authHost.post('api/user/add_org', {org_name, simed_admin_pass, remote_access, city, comment})
-    return ("Клиент добавлен!")
+    const {data} = await $authHost.post('api/user/add_org', {org_name, simed_admin_pass, remote_access, city, comment})
+    return (data)
 }
 
 export const org_delete = async (org_id: number) => {
@@ -10,8 +10,8 @@ export const org_delete = async (org_id: number) => {
     return ("Удалено!")
 }
 
-export const anydesk_add = async (anydesk_id: string, org_id: number, anydes_password: string) => {
-    await $authHost.post('api/user/add_anydesk', {anydesk_id, org_id, anydes_password})
+export const anydesk_add = async (anydesk_id: string, org_id: number, anydesk_password: string) => {
+    await $authHost.post('api/user/add_anydesk', {anydesk_id, org_id, anydesk_password})
     return ("Добавлено!")
 }
 

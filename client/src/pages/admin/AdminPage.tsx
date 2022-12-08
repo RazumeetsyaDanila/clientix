@@ -81,8 +81,9 @@ const AdminPage = () => {
             <div className='headerContainer w-[1100px]'>
                 <NavLink to='/login' className='btn w-[90px] h-[30px]' onClick={logOut}>← Выйти</NavLink>
                 <input placeholder='Поиск по наименованию организации' className='input w-[296px] mr-[10px]' type="text" value={textFilter} onChange={e => setTextFilter(e.target.value)} />
-                <div className='flex justify-between w-[430px]'>
+                <div className='flex justify-between w-[510px]'>
                     <NavLink className='linkBtn w-[200px]' to='/org_add'>Добавить организацию</NavLink>
+                    <NavLink className='linkBtn w-[80px]' to='/file'>Файлы</NavLink>
                     <NavLink className='linkBtn w-[80px]' to='/tags'>Теги</NavLink>
                     <NavLink className='linkBtn w-[120px]' to='/users'>Пользователи</NavLink>
                 </div>
@@ -104,7 +105,7 @@ const AdminPage = () => {
                         .map(c => <tr key={c.org_id}>
                             <td className={s.tableTd + ' w-[430px]'} data-th="Название организации"> <NavLink to={'/org/' + c.org_id}>{c.org_name}</NavLink></td>
                             <td className={s.tableTd + ' w-[300px]'} data-th="Пароль админа">{<CopiedText text={c.simed_admin_pass} />}</td>
-                            <td className={s.tableTd + ' w-[170px]'} data-th="Удаленный доступ"><div onClick={() => showRemoteAccess(c.org_id, c.remote_access)} className=":hover cursor-pointer">{c.remote_access}</div></td>
+                            <td className={s.tableTd + ' w-[170px]'} data-th="Удаленный доступ"><div onClick={() => showRemoteAccess(c.org_id, c.remote_access)} className="hover:cursor-pointer">{c.remote_access}</div></td>
                             <td className={s.tableTd + ' w-[200px]'} data-th="Город">{c.city}</td>
                             {/* <td className={s.tableTd + ' w-[200px]'} data-th="Комментарий">{c.comment}</td> */}
                         </tr>
@@ -121,7 +122,7 @@ const AdminPage = () => {
             <Modal visible={remoteAccessModal} setVisible={setRemoteAccessModal}>
                 <div className='flex flex-col items-center w-[250px]'>
                     <p className='mb-[10px] text-[24px]'>Данные {remoteAccessType}</p>
-                    <hr className='w-[230px] mb-[20px]'/>
+                    <hr className='w-[230px] mb-[10px]'/>
                     <div>
                         {
                             (() => {

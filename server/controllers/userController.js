@@ -71,7 +71,12 @@ class UserController {
                 .input('comment', sql.VarChar, comment)
                 .query('INSERT INTO organizations (org_name, simed_admin_pass, remote_access, city, comment)' +
                     'VALUES (@org_name, @simed_admin_pass, @remote_access, @city, @comment)')
-            return res.json({ message: "Организация добавлена!" })
+            // return res.json({ message: "Организация добавлена!" })
+            let orgId = await pool.request()
+            .input('org_name', sql.VarChar, org_name)
+            .query('SELECT * FROM organizations WHERE org_name = @org_name')
+
+            return res.json(orgId.recordset[0].org_id)
         } catch (e) {
             return res.json(e.message);
         }
@@ -184,7 +189,7 @@ class UserController {
                 .input('rdp_ip', sql.VarChar, rdp_ip)
                 .input('rdp_login', sql.VarChar, rdp_login)
                 .input('rdp_password', sql.VarChar, rdp_password)
-                .query('INSERT INTO anydesk (org_id, vpn_ip, vpn_login, vpn_password, vpn_type, rdp_ip, rdp_login, rdp_password)' +
+                .query('INSERT INTO rdp (org_id, vpn_ip, vpn_login, vpn_password, vpn_type, rdp_ip, rdp_login, rdp_password)' +
                     'VALUES (@org_id, @vpn_ip, @vpn_login, @vpn_password, @vpn_type, @rdp_ip, @rdp_login, @rdp_password)')
             return res.json({ message: "rdp добавлен!" })
         } catch (e) {

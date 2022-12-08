@@ -10,6 +10,7 @@ import TagsPage from './pages/tags/TagsPage';
 import TagAddPage from './pages/tagAdd/TagAddPage';
 import OrgPage from './pages/org/OrgPage';
 import Reauth from './pages/reauth/Reauth';
+import FilesPage from './pages/files/FilesPage';
 
 interface IRoutes{
     path: string,
@@ -45,6 +46,10 @@ export const adminRoutes: IRoutes[] = [
         path: routes.ORG_ROUTE,
         Component: OrgPage
     },
+    {
+        path: routes.FILES_ROUTE,
+        Component: FilesPage
+    }
 ]
 
 export const slaveRoutes: IRoutes[] = [
@@ -59,6 +64,10 @@ export const slaveRoutes: IRoutes[] = [
     {
         path: routes.TAGS_ROUTE,
         Component: TagsPage
+    },
+    {
+        path: routes.FILES_ROUTE,
+        Component: FilesPage
     }
 ]
 
