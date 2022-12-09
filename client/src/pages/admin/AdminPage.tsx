@@ -120,7 +120,7 @@ const AdminPage = () => {
 
 
             <Modal visible={remoteAccessModal} setVisible={setRemoteAccessModal}>
-                <div className='flex flex-col items-center w-[250px]'>
+                <div className='flex flex-col items-center w-[300px]'>
                     <p className='mb-[10px] text-[24px]'>Данные {remoteAccessType}</p>
                     <hr className='w-[230px] mb-[10px]'/>
                     <div>
