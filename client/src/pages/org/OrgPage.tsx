@@ -4,6 +4,7 @@ import { useTypedSelector } from '../../hooks/useTypedSelector';
 import Modal from '../../components/UI/modal/Modal';
 import { org_delete } from '../../http/clientsAPI';
 import { routes } from '../../consts';
+import backBtnImg from '../../img/previous.png'
 
 const OrgPage = () => {
     const params = useParams();
@@ -44,8 +45,8 @@ const OrgPage = () => {
 
             <button className='redBtn w-[90px] h-[30px] deleteBtnPos' onClick={() => startDeleteOrg()}>Удалить</button>
 
-            <NavLink to='/admin' className='btn w-[90px] h-[30px] backBtnPos'>
-                ← назад
+            <NavLink to='/admin' className='bigLeftBackBtnContainer'>
+                <img src={backBtnImg} alt="" />
             </NavLink>
 
             <Modal visible={deleteConfirmModal} setVisible={setDeleteConfirmModal}>

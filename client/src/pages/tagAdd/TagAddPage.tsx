@@ -75,7 +75,7 @@ const TagAddPage = () => {
                 ← назад
             </NavLink> */}
 
-            <NavLink to='/admin' className='bigLeftBackBtnContainer'>
+            <NavLink to='/tags' className='bigLeftBackBtnContainer'>
                 <img src={backBtnImg} alt="" />
             </NavLink>
 
