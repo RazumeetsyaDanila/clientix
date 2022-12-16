@@ -138,6 +138,9 @@ const AdminPage = () => {
                                                 <div className='flex'><span className='mr-[10px]'>ip rdp:</span> <CopiedText text={rdpData[0].rdp_ip} /> </div>
                                                 <div className='flex'><span className='mr-[10px]'>логин rdp:</span> <CopiedText text={rdpData[0].rdp_login} /> </div>
                                                 <div className='flex'><span className='mr-[10px]'>пароль rdp:</span> <CopiedText text={rdpData[0].rdp_password} /> </div>
+                                                <hr className='w-[230px] mt-[4px] mb-[4px]'/>
+                                                <div className='flex'><span className='mr-[10px]'>windows логин:</span> <CopiedText text={rdpData[0].windows_login} /> </div>
+                                                <div className='flex'><span className='mr-[10px]'>windows пароль:</span> <CopiedText text={rdpData[0].windows_password} /> </div>
                                             </div>
                                         }
                                         else return <div>Нет данных rdp</div>

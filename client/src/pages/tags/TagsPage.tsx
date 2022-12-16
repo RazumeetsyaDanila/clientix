@@ -5,6 +5,8 @@ import { NavLink } from 'react-router-dom';
 import CopiedText from '../../components/UI/copiedText/CopiedText';
 import Modal from '../../components/UI/modal/Modal';
 import { delete_tag, update_tag } from '../../http/tagsAPI';
+import backBtnImg from '../../img/previous.png';
+import refreshBtnImg from '../../img/refresh.png';
 
 const TagsPage = () => {
     const { tags, tagsGroups, loading, error } = useTypedSelector(state => state.tags)
@@ -80,16 +82,18 @@ const TagsPage = () => {
     return (
         <div className='centerContainer mt-[10px]'>
             <p className='text-3xl select-none mb-[4px]'>Список тегов</p>
+            {currentUserRole === 'admin' ? <NavLink to='/admin' className='bigLeftBackBtnContainer'><img src={backBtnImg} alt="" /></NavLink> : <NavLink to='/slave' className='bigLeftBackBtnContainer'><img src={backBtnImg} alt="" /></NavLink>}
 
             <div className='headerContainer w-[1010px]'>
-                {currentUserRole === 'admin' ? <NavLink to='/admin' className='btn w-[90px] h-[30px]'>← Назад</NavLink> : <NavLink to='/slave' className='btn w-[90px] h-[30px]'>← Назад</NavLink>}
+                {/* {currentUserRole === 'admin' ? <NavLink to='/admin' className='btn w-[90px] h-[30px]'>← Назад</NavLink> : <NavLink to='/slave' className='btn w-[90px] h-[30px]'>← Назад</NavLink>} */}
                 <div className='flex'>
-                    <input placeholder='Поиск по наименованию' className='input w-[196px] mr-[10px]' type="text" value={textFilter} onChange={e => setTextFilter(e.target.value)} />
+                    <input placeholder='Поиск тега по наименованию...' className='input w-[320px] mr-[10px]' type="text" value={textFilter} onChange={e => setTextFilter(e.target.value)} />
                     <select className='btn w-[230px] h-[30px] pl-[10px]' onChange={e => filterTags(e)} >
                         <option value={0}>Все</option>
                         {tagsGroups.map(t => <option key={t.group_id} value={t.group_id}>{t.group_name}</option>)}
                     </select>
-                    <button className='w-[10px] ml-[10px]' onClick={refresh}>&#8635;</button>
+                    {/* <button className='w-[10px] ml-[10px]' onClick={refresh}>&#8635;</button> */}
+                    <img src={refreshBtnImg} alt="" className='w-[20px] h-[20px] ml-[16px] cursor-pointer opacity-[0.5] hover:opacity-[1] self-center' onClick={refresh}/>
                 </div>
                 
                 <NavLink className='linkBtn w-[200px]' to='/tag_add'>Добавить тег</NavLink>

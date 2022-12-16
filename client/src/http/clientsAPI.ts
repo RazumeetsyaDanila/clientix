@@ -20,8 +20,8 @@ export const anydesk_get = async (org_id: number) => {
     return (data)
 }
 
-export const rdp_add = async (org_id: number, vpn_ip: string, vpn_login: string, vpn_password: string, vpn_type: string, rdp_ip: string, rdp_login: string, rdp_password: string) => {
-    await $authHost.post('api/user/add_rdp', {org_id, vpn_ip, vpn_login, vpn_password, vpn_type, rdp_ip, rdp_login, rdp_password})
+export const rdp_add = async (org_id: number, vpn_ip: string, vpn_login: string, vpn_password: string, vpn_type: string, rdp_ip: string, rdp_login: string, rdp_password: string, windows_login: string, windows_password: string) => {
+    await $authHost.post('api/user/add_rdp', {org_id, vpn_ip, vpn_login, vpn_password, vpn_type, rdp_ip, rdp_login, rdp_password, windows_login, windows_password})
     return ("Добавлено!")
 }
 

@@ -177,7 +177,7 @@ class UserController {
 
     async add_rdp(req, res, next) {
         try {
-            const { org_id, vpn_ip, vpn_login, vpn_password, vpn_type, rdp_ip, rdp_login, rdp_password} = req.body
+            const { org_id, vpn_ip, vpn_login, vpn_password, vpn_type, rdp_ip, rdp_login, rdp_password, windows_login, windows_password} = req.body
             let pool = await sql.connect(sqlConfig)
 
             await pool.request()
@@ -189,8 +189,10 @@ class UserController {
                 .input('rdp_ip', sql.VarChar, rdp_ip)
                 .input('rdp_login', sql.VarChar, rdp_login)
                 .input('rdp_password', sql.VarChar, rdp_password)
-                .query('INSERT INTO rdp (org_id, vpn_ip, vpn_login, vpn_password, vpn_type, rdp_ip, rdp_login, rdp_password)' +
-                    'VALUES (@org_id, @vpn_ip, @vpn_login, @vpn_password, @vpn_type, @rdp_ip, @rdp_login, @rdp_password)')
+                .input('windows_login', sql.VarChar, windows_login)
+                .input('windows_password', sql.VarChar, windows_password)
+                .query('INSERT INTO rdp (org_id, vpn_ip, vpn_login, vpn_password, vpn_type, rdp_ip, rdp_login, rdp_password, windows_login, windows_password)' +
+                    'VALUES (@org_id, @vpn_ip, @vpn_login, @vpn_password, @vpn_type, @rdp_ip, @rdp_login, @rdp_password, @windows_login, @windows_password)')
             return res.json({ message: "rdp добавлен!" })
         } catch (e) {
             return res.json(e.message);

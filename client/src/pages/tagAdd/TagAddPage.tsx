@@ -5,6 +5,7 @@ import { routes } from '../../consts';
 import { useNavigate, NavLink } from 'react-router-dom';
 import Modal from '../../components/UI/modal/Modal';
 import { useActions } from '../../hooks/useActions';
+import backBtnImg from '../../img/previous.png';
 
 const TagAddPage = () => {
 
@@ -56,7 +57,7 @@ const TagAddPage = () => {
 
     return (
         <div>
-            <div className='centerContainer h-screen'>
+            <div className='centerContainer h-screen w-screen'>
                 <p className='mb-[10px] text-2xl'>Добавление тега</p>
 
                 <input className='authInput' type="text" placeholder="Наименование тега" value={tagName} onChange={e => setTagName(e.target.value)} />
@@ -70,8 +71,12 @@ const TagAddPage = () => {
                 <button className='authButton' onClick={tagAdd} >Добавить</button>
             </div>
 
-            <NavLink to='/tags' className='btn w-[80px] h-[30px] backBtnPos'>
+            {/* <NavLink to='/tags' className='btn w-[80px] h-[30px] backBtnPos'>
                 ← назад
+            </NavLink> */}
+
+            <NavLink to='/admin' className='bigLeftBackBtnContainer'>
+                <img src={backBtnImg} alt="" />
             </NavLink>
 
             <Modal visible={errorModal1} setVisible={setErrorModal1}>

@@ -6,6 +6,7 @@ import { routes } from '../../consts';
 import s from './usersPage.module.scss'
 import { delete_user } from '../../http/usersAPI';
 import ErrorModal from '../../components/UI/modal/Modal';
+import backBtnImg from '../../img/previous.png'
 
 
 const UsersPage = () => {
@@ -82,8 +83,8 @@ const UsersPage = () => {
                 </div>
             </NavLink>
 
-            <NavLink to='/admin' className='btn w-[90px] h-[30px] backBtnPos'>
-                ← назад
+            <NavLink to='/admin' className='bigLeftBackBtnContainer'>
+                <img src={backBtnImg} alt="" />
             </NavLink>
 
             <ErrorModal visible={deleteModal} setVisible={setDeleteModal}>

@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import docImg from '../../img/document.png'
 import batImg from '../../img/bat.png'
+import backBtnImg from '../../img/previous.png'
 
 const FilesPage = () => {
     const navigate = useNavigate()
@@ -34,8 +35,8 @@ const FilesPage = () => {
                 </NavLink>
             </div>
 
-            <NavLink to='/admin' className='btn w-[90px] h-[30px] backBtnPos'>
-                ← назад
+            <NavLink to='/admin' className='bigLeftBackBtnContainer'>
+                <img src={backBtnImg} alt="" />
             </NavLink>
         </div>
     );

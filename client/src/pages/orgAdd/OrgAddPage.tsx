@@ -3,6 +3,7 @@ import { org_add, anydesk_add, rdp_add } from '../../http/clientsAPI';
 import { routes } from '../../consts';
 import { Navigate, useNavigate, NavLink } from 'react-router-dom';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
+import backBtnImg from '../../img/previous.png'
 
 const OrgAddPage = () => {
     const [orgName, setOrgName] = useState('')
@@ -16,6 +17,8 @@ const OrgAddPage = () => {
     const [rdpIp, setRdpIp] = useState('')
     const [rdpLogin, setRdpLogin] = useState('')
     const [rdpPassword, setRdpPassword] = useState('')
+    const [windowsLogin, setWindowsLogin] = useState('')
+    const [windowsPassword, setWindowsPassword] = useState('')
     const [remoteAccess, setRemoteAccess] = useState('нет')
     const [city, setCity] = useState('')
     const [comment, setComment] = useState('')
@@ -28,12 +31,12 @@ const OrgAddPage = () => {
 
     const orgAdd = async () => {
         try {
-            if (orgName && (remoteAccess === 'нет' || (remoteAccess === 'anydesk' && anydeskId && anydeskPass) || (remoteAccess === 'rdp' && vpnIp && vpnLogin && vpnPassword && vpnType && rdpIp && rdpLogin && rdpPassword))) {
+            if (orgName && (remoteAccess === 'нет' || (remoteAccess === 'anydesk' && anydeskId && anydeskPass) || (remoteAccess === 'rdp' && rdpIp && rdpLogin && rdpPassword))) {
                 let orgId = await org_add(orgName, simedAdminPass, remoteAccess, city, comment)
                 if (remoteAccess === 'anydesk')
                     await anydesk_add(anydeskId, orgId, anydeskPass)
                 if (remoteAccess === 'rdp')
-                    await rdp_add(orgId, vpnIp, vpnLogin, vpnPassword, vpnType, rdpIp, rdpLogin, rdpPassword)
+                    await rdp_add(orgId, vpnIp, vpnLogin, vpnPassword, vpnType, rdpIp, rdpLogin, rdpPassword, windowsLogin, windowsPassword)
                 currentUserRole == 'admin' ? navigate(routes.ADMIN_ROUTE) : navigate(routes.SLAVE_ROUTE)
             }
         } catch (e: any) {
@@ -80,6 +83,8 @@ const OrgAddPage = () => {
                                 <input className='authInput' type="text" placeholder="rdp ip" value={rdpIp} onChange={e => setRdpIp(e.target.value)} />
                                 <input className='authInput' type="text" placeholder="rdp логин" value={rdpLogin} onChange={e => setRdpLogin(e.target.value)} />
                                 <input className='authInput' type="text" placeholder="rdp пароль" value={rdpPassword} onChange={e => setRdpPassword(e.target.value)} />
+                                <input className='authInput' type="text" placeholder="логин windows" value={windowsLogin} onChange={e => setWindowsLogin(e.target.value)} />
+                                <input className='authInput' type="text" placeholder="пароль windows" value={windowsPassword} onChange={e => setWindowsPassword(e.target.value)} />
                             </div>
 
                         case 'anydesk':
@@ -96,8 +101,11 @@ const OrgAddPage = () => {
 
             <button className='authButton mt-[30px]' onClick={orgAdd} >Добавить</button>
 
-            <NavLink to='/admin' className='btn w-[90px] h-[30px] backBtnPos'>
+            {/* <NavLink to='/admin' className='btn w-[90px] h-[30px] backBtnPos'>
                 ← назад
+            </NavLink> */}
+            <NavLink to='/admin' className='bigLeftBackBtnContainer'>
+                <img src={backBtnImg} alt="" />
             </NavLink>
         </div>
     );
