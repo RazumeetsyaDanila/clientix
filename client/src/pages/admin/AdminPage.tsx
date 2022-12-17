@@ -94,7 +94,7 @@ const AdminPage = () => {
                     <tr>
                         <th className={s.tableTd + ' w-[430px]'}>Название организации</th>
                         <th className={s.tableTd + ' w-[300px]'}>Пароль админа</th>
-                        <th className={s.tableTd + ' w-[170px]'}>Удаленный доступ</th>
+                        <th className={s.tableTd + ' w-[170px]'}>Доступ к серверу</th>
                         <th className={s.tableTd + ' w-[200px]'}>Город</th>
                         {/* <th className={s.tableTd + ' w-[200px]'}>Комментарий</th> */}
                     </tr>
@@ -105,22 +105,17 @@ const AdminPage = () => {
                         .map(c => <tr key={c.org_id}>
                             <td className={s.tableTd + ' w-[430px]'} data-th="Название организации"> <NavLink to={'/org/' + c.org_id}>{c.org_name}</NavLink></td>
                             <td className={s.tableTd + ' w-[300px]'} data-th="Пароль админа">{<CopiedText text={c.simed_admin_pass} />}</td>
-                            <td className={s.tableTd + ' w-[170px]'} data-th="Удаленный доступ"><div onClick={() => showRemoteAccess(c.org_id, c.remote_access)} className="hover:cursor-pointer">{c.remote_access}</div></td>
+                            <td className={s.tableTd + ' w-[170px]'} data-th="Доступ к серверу"><div onClick={() => showRemoteAccess(c.org_id, c.remote_access)} className="hover:cursor-pointer">{c.remote_access}</div></td>
                             <td className={s.tableTd + ' w-[200px]'} data-th="Город">{c.city}</td>
                             {/* <td className={s.tableTd + ' w-[200px]'} data-th="Комментарий">{c.comment}</td> */}
                         </tr>
                         )}
                 </tbody>
             </table>
-            {/* <NavLink to='/files/cert_export_CA.sokolmed.itl-service.ru.p12' target="_blank" download> скачать сертификат соколмед</NavLink>
-            <NavLink to='/files/cert_export_CA.sokolmed.itl-service.ru.p12' target="_blank"> скачать сертификат соколмед</NavLink>
-            <p>test</p> */}
-
-
 
 
             <Modal visible={remoteAccessModal} setVisible={setRemoteAccessModal}>
-                <div className='flex flex-col items-center w-[300px]'>
+                <div className='flex flex-col items-center w-[350px]'>
                     <p className='mb-[10px] text-[24px]'>Данные {remoteAccessType}</p>
                     <hr className='w-[230px] mb-[10px]'/>
                     <div>

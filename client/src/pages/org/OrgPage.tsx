@@ -1,10 +1,14 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, NavLink, useNavigate } from 'react-router-dom';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import Modal from '../../components/UI/modal/Modal';
 import { org_delete } from '../../http/clientsAPI';
 import { routes } from '../../consts';
 import backBtnImg from '../../img/previous.png'
+import mainBtnImg from '../../img/main-min.png'
+import contactsBtnImg from '../../img/contacts_min.png'
+import databaseBtnImg from '../../img/database-min.png'
+import SideMenuItem from '../../components/UI/sideMenuItem/SideMenuItem';
 
 const OrgPage = () => {
     const params = useParams();
@@ -14,12 +18,14 @@ const OrgPage = () => {
     const { clients, loading, error } = useTypedSelector(state => state.clients)
     const currentOrg = clients.find(clients => clients.org_id == orgId)
 
+    const [view, setView] = useState("main")
+
     const [deleteConfirmModal, setDeleteConfirmModal] = useState(false)
 
     const navigate = useNavigate()
 
     useEffect(() => {
-        
+
     }, [])
 
     const startDeleteOrg = () => {
@@ -36,12 +42,43 @@ const OrgPage = () => {
     if (error) return <h1 className='centerContainer h-screen text-2xl'>{error}</h1>
     return (
         <div className='centerContainer h-screen'>
-            {/* <p className='text-3xl'>Организация № {orgId}</p> */}
-            <p className='mb-[30px] text-3xl'>Название: {currentOrg.org_name}</p>
+            <p className='mb-[30px] text-3xl fixed top-4'>{currentOrg.org_name}</p>
 
-            {/* <NavLink to='/files/cert_export_CA.sokolmed.itl-service.ru.p12' target="_blank" download> скачать сертификат соколмед</NavLink>
-            <NavLink to='/files/rdp-cdt2.bat' target="_blank" download> скачать батник rdp-cdt2.bat </NavLink>
-            <NavLink to='/files/rdp-ldc2.bat' target="_blank" download> скачать батник rdp-ldc2.bat </NavLink> */}
+            {
+                (() => {
+                    switch (view) {
+                        case 'main':
+                            return <div>
+                                главная
+                            </div>
+
+                        case 'sql':
+                            return <div>
+                                sql
+                            </div>
+
+                        case 'contacts':
+                            return <div>
+                                контакты
+                            </div>
+
+                        default:
+                            return <div></div>
+                    }
+                })()
+            }
+
+            <div className='orgSideMenu'>
+                <div onClick={() => setView("main")} className='cursor-pointer mb-[10px]'>
+                    {view === 'main' ? <SideMenuItem img={mainBtnImg} description={"главная"} opacity={false} /> : <SideMenuItem img={mainBtnImg} description={"главная"} opacity={true} />}
+                </div>
+                <div onClick={() => setView("sql")} className='cursor-pointer mb-[10px]'>
+                    {view === 'sql' ? <SideMenuItem img={databaseBtnImg} description={"sql"} opacity={false} /> : <SideMenuItem img={databaseBtnImg} description={"sql"} opacity={true} />}
+                </div>
+                <div onClick={() => setView("contacts")} className='cursor-pointer'>
+                    {view === 'contacts' ? <SideMenuItem img={contactsBtnImg} description={"контакты"} opacity={false} /> : <SideMenuItem img={contactsBtnImg} description={"контакты"} opacity={true} />}
+                </div>
+            </div>
 
             <button className='redBtn w-[90px] h-[30px] deleteBtnPos' onClick={() => startDeleteOrg()}>Удалить</button>
 

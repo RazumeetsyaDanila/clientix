@@ -141,8 +141,8 @@ table td {
 
 .deleteBtnPos{
     position: fixed;
-    bottom: 40px;
-    right: 50px;
+    bottom: 30px;
+    right: 40px;
 }
 
 .usersBtnPos{
@@ -191,4 +191,17 @@ table td {
         margin-right: 28px;
         width: 42px;
     }
+}
+
+.orgSideMenu{
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    height: 100vh;
+    width: 90px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: 40px;
 }
