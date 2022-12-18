@@ -125,17 +125,17 @@ const AdminPage = () => {
                                     case 'rdp':
                                         if (rdpData[0].id_org != 0) {
                                             return <div className='flex flex-col items-center text-[20px]'>
-                                                <div className='flex'><span className='mr-[10px]'>ip vpn:</span> <CopiedText text={rdpData[0].vpn_ip} /> </div>
-                                                <div className='flex'><span className='mr-[10px]'>логин vpn:</span> <CopiedText text={rdpData[0].vpn_login} /> </div>
-                                                <div className='flex'><span className='mr-[10px]'>пароль vpn:</span> <CopiedText text={rdpData[0].vpn_password} /> </div>
-                                                <div className='flex'><span className='mr-[10px]'>тип vpn:</span> <CopiedText text={rdpData[0].vpn_type} /> </div>
-                                                <hr className='w-[230px] mt-[4px] mb-[4px]'/>
+                                                {rdpData[0].vpn_ip && <div className='flex'><span className='mr-[10px]'>ip vpn:</span> <CopiedText text={rdpData[0].vpn_ip} /> </div>}
+                                                {rdpData[0].vpn_login && <div className='flex'><span className='mr-[10px]'>логин vpn:</span> <CopiedText text={rdpData[0].vpn_login} /> </div>}
+                                                {rdpData[0].vpn_password && <div className='flex'><span className='mr-[10px]'>пароль vpn:</span> <CopiedText text={rdpData[0].vpn_password} /> </div>}
+                                                {rdpData[0].vpn_type != 'автоматически' && <div className='flex'><span className='mr-[10px]'>тип vpn:</span> <CopiedText text={rdpData[0].vpn_type} /> </div>}
+                                                {rdpData[0].vpn_ip && <hr className='w-[230px] mt-[4px] mb-[4px]'/>}
                                                 <div className='flex'><span className='mr-[10px]'>ip rdp:</span> <CopiedText text={rdpData[0].rdp_ip} /> </div>
                                                 <div className='flex'><span className='mr-[10px]'>логин rdp:</span> <CopiedText text={rdpData[0].rdp_login} /> </div>
                                                 <div className='flex'><span className='mr-[10px]'>пароль rdp:</span> <CopiedText text={rdpData[0].rdp_password} /> </div>
-                                                <hr className='w-[230px] mt-[4px] mb-[4px]'/>
-                                                <div className='flex'><span className='mr-[10px]'>windows логин:</span> <CopiedText text={rdpData[0].windows_login} /> </div>
-                                                <div className='flex'><span className='mr-[10px]'>windows пароль:</span> <CopiedText text={rdpData[0].windows_password} /> </div>
+                                                {rdpData[0].windows_login && <hr className='w-[230px] mt-[4px] mb-[4px]'/>}
+                                                {rdpData[0].windows_login && <div className='flex'><span className='mr-[10px]'>windows логин:</span> <CopiedText text={rdpData[0].windows_login} /> </div>}
+                                                {rdpData[0].windows_password && <div className='flex'><span className='mr-[10px]'>windows пароль:</span> <CopiedText text={rdpData[0].windows_password} /> </div>}
                                             </div>
                                         }
                                         else return <div>Нет данных rdp</div>

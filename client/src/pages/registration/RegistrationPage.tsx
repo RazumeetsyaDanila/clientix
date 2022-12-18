@@ -2,6 +2,7 @@ import { useState} from 'react';
 import { useNavigate, NavLink } from 'react-router-dom';
 import { routes } from '../../consts';
 import { registration } from '../../http/userAPI';
+import backBtnImg from '../../img/previous.png'
 
 const RegistrationPage = () => {
     const navigate = useNavigate()    
@@ -25,8 +26,8 @@ const RegistrationPage = () => {
             <input className='authInput' type="password" placeholder="password" value={password} onChange={e => setPassword(e.target.value)} />
             <button className='authButton' onClick={reg} >Добавить</button>
 
-            <NavLink to='/users' className='btn w-[90px] h-[30px] backBtnPos'>
-                ← назад
+            <NavLink to='/users' className='bigLeftBackBtnContainer'>
+                <img src={backBtnImg} alt="" />
             </NavLink>
         </div>
     );

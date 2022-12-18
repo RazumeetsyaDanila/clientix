@@ -8,6 +8,8 @@ import backBtnImg from '../../img/previous.png'
 import mainBtnImg from '../../img/main-min.png'
 import contactsBtnImg from '../../img/contacts_min.png'
 import databaseBtnImg from '../../img/database-min.png'
+import queueBtnImg from '../../img/queue-min.png'
+import edocBtnImg from '../../img/edoc-min.png'
 import SideMenuItem from '../../components/UI/sideMenuItem/SideMenuItem';
 
 const OrgPage = () => {
@@ -49,12 +51,22 @@ const OrgPage = () => {
                     switch (view) {
                         case 'main':
                             return <div>
-                                главная
+                                главная: инфо об организации, лаборатории, телефония, смс-центр, дадата
                             </div>
 
-                        case 'sql':
+                        case 'database':
                             return <div>
-                                sql
+                                базы данных sql и mongodb
+                            </div>
+
+                        case 'queue':
+                            return <div>
+                                очередь
+                            </div>
+
+                        case 'egisz':
+                            return <div>
+                                ЕГИСЗ
                             </div>
 
                         case 'contacts':
@@ -72,8 +84,14 @@ const OrgPage = () => {
                 <div onClick={() => setView("main")} className='cursor-pointer mb-[10px]'>
                     {view === 'main' ? <SideMenuItem img={mainBtnImg} description={"главная"} opacity={false} /> : <SideMenuItem img={mainBtnImg} description={"главная"} opacity={true} />}
                 </div>
-                <div onClick={() => setView("sql")} className='cursor-pointer mb-[10px]'>
-                    {view === 'sql' ? <SideMenuItem img={databaseBtnImg} description={"sql"} opacity={false} /> : <SideMenuItem img={databaseBtnImg} description={"sql"} opacity={true} />}
+                <div onClick={() => setView("database")} className='cursor-pointer mb-[10px]'>
+                    {view === 'database' ? <SideMenuItem img={databaseBtnImg} description={"БД"} opacity={false} /> : <SideMenuItem img={databaseBtnImg} description={"БД"} opacity={true} />}
+                </div>
+                <div onClick={() => setView("queue")} className='cursor-pointer mb-[10px]'>
+                    {view === 'queue' ? <SideMenuItem img={queueBtnImg} description={"очередь"} opacity={false} /> : <SideMenuItem img={queueBtnImg} description={"очередь"} opacity={true} />}
+                </div>
+                <div onClick={() => setView("egisz")} className='cursor-pointer mb-[10px]'>
+                    {view === 'egisz' ? <SideMenuItem img={edocBtnImg} description={"ЕГИСЗ"} opacity={false} /> : <SideMenuItem img={edocBtnImg} description={"ЕГИСЗ"} opacity={true} />}
                 </div>
                 <div onClick={() => setView("contacts")} className='cursor-pointer'>
                     {view === 'contacts' ? <SideMenuItem img={contactsBtnImg} description={"контакты"} opacity={false} /> : <SideMenuItem img={contactsBtnImg} description={"контакты"} opacity={true} />}
