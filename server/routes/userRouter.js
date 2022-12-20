@@ -14,6 +14,7 @@ router.post('/get_anydesk', authMiddleware, userController.get_anydesk)
 router.post('/add_rdp', authMiddleware, userController.add_rdp)
 router.post('/get_rdp', authMiddleware, userController.get_rdp)
 router.post('/update_org', authMiddleware, userController.update_org)
+router.post('/get_org', authMiddleware, userController.get_org)
 // router.post('/delete_org', authMiddleware, userController.delete_org)
 
 

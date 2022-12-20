@@ -53,6 +53,22 @@ class UserController {
         }
     }
 
+    async get_org(req, res, next) {
+        try {
+            const { org_id } = req.body
+            let pool = await sql.connect(sqlConfig)
+            let organization = await pool.request()
+                .input('org_id', sql.Int, org_id)
+                .query('SELECT org_id, org_name,simed_admin_pass ,remote_access, comment, city FROM organizations WHERE org_id = @org_id')
+
+            if (organization.recordset.length == 0) return next(ApiError.internal('Ни одной организации не найдено'))
+
+            return res.json(organization.recordset)
+        } catch (e) {
+            return res.json(e.message);
+        }
+    }
+
     async add_org(req, res, next) {
         try {
             const { org_name, simed_admin_pass, remote_access, city, comment } = req.body
@@ -84,7 +100,7 @@ class UserController {
 
     async update_org(req, res, next) {
         try {
-            const { org_id, org_name, sql_name, sa_password, mongo_db, simed_admin_pass, egisz, smsc_login, smsc_pass, dadata, remote_access, city, backup, comment } = req.body
+            const { org_id, org_name, simed_admin_pass, remote_access, city, comment } = req.body
             let pool = await sql.connect(sqlConfig)
             await pool.request()
                 .input('org_id', sql.Int, org_id)
@@ -95,7 +111,7 @@ class UserController {
                 .input('comment', sql.VarChar, comment)
                 .query('UPDATE organizations SET org_name = @org_name, ' +
                     'comment = @comment, city = @city, remote_access = @remote_access, ' +
-                    'simed_admin_pass = @simed_admin_pass, ' +
+                    'simed_admin_pass = @simed_admin_pass ' +
                     'WHERE org_id = @org_id')
             return res.json({ message: "Организация обновлена!" })
         } catch (e) {
