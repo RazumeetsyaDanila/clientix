@@ -1,22 +1,20 @@
-// для сервера api
-// export const REACT_APP_API_URL: string = 'http://vps.razumeetsya.ru:5000/'
+let placeOfWork = 'work' //work - рабочий комп, home - домашний комп, prod - рабочий сервер
 
-// для локального домашнего
-export const REACT_APP_API_URL: string = 'http://192.168.1.107:5000/'
+export let REACT_APP_API_URL: string
+export let REACT_APP_URL: string
 
-// для локального рабочего
-// export const REACT_APP_API_URL: string = 'http://192.168.0.31:5000/'
-
-// для рабочего сервера
-// export const REACT_APP_API_URL: string = 'http://192.168.0.56:5000/'
-
-// для сервера react-app
-// export const REACT_APP_URL: string = 'http://vps.razumeetsya.ru:3000/'
-// export const REACT_APP_URL: string = 'http://192.168.1.107:3000/'
-export const REACT_APP_URL: string = 'http://localhost:3000/'
-// для рабочего сервера
-// export const REACT_APP_URL: string = 'http://sm-serv01:322/'
-// export const REACT_APP_URL: string = 'http://clientix.local:322/'
+if(placeOfWork == 'work'){
+    REACT_APP_API_URL = 'http://192.168.0.31:5000/'
+    REACT_APP_URL = 'http://localhost:3000/'
+}
+if(placeOfWork == 'home'){
+    REACT_APP_API_URL = 'http://192.168.1.107:5000/'
+    REACT_APP_URL = 'http://localhost:3000/'
+}
+if(placeOfWork == 'prod'){
+    REACT_APP_API_URL = 'http://192.168.0.56:5000/'
+    REACT_APP_URL = 'http://clientix.local:322/'
+}
 
 export enum routes{
     ADMIN_ROUTE = '/admin',
@@ -33,3 +31,30 @@ export enum routes{
 }
 
 export const correct_routes: string[] = ['admin', 'slave', 'login', 'users', 'registration', 'org_add', 'tags', 'tag_add', 'file', 'org', 'reauth']
+
+
+
+
+
+
+// для сервера api
+// export const REACT_APP_API_URL: string = 'http://vps.razumeetsya.ru:5000/'
+
+// для локального домашнего
+// export const REACT_APP_API_URL: string = 'http://192.168.1.107:5000/'
+
+
+// // для локального рабочего
+// export const REACT_APP_API_URL: string = 'http://192.168.0.31:5000/'
+
+
+// для рабочего сервера
+// export const REACT_APP_API_URL: string = 'http://192.168.0.56:5000/'
+
+// для сервера react-app
+// export const REACT_APP_URL: string = 'http://vps.razumeetsya.ru:3000/'
+// export const REACT_APP_URL: string = 'http://192.168.1.107:3000/'
+// export const REACT_APP_URL: string = 'http://localhost:3000/'
+// для рабочего сервера
+// export const REACT_APP_URL: string = 'http://sm-serv01:322/'
+// export const REACT_APP_URL: string = 'http://clientix.local:322/'
