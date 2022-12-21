@@ -64,7 +64,6 @@ const OrgAddPage = () => {
                 <option value={'anydesk'}>anydesk</option>
                 <option value={'rdp'}>rdp</option>
             </select>
-            {/* <textarea className='bigAuthInput' placeholder="Комментарий" value={comment} onChange={e => setComment(e.target.value)} /> */}
 
             {
                 (() => {
@@ -99,11 +98,10 @@ const OrgAddPage = () => {
                 })()
             }
 
-            <button className='authButton mt-[30px]' onClick={orgAdd} >Добавить</button>
+            <textarea className='bigAuthInput'  placeholder="Комментарий" value={comment} onChange={e => setComment(e.target.value)} />
 
-            {/* <NavLink to='/admin' className='btn w-[90px] h-[30px] backBtnPos'>
-                ← назад
-            </NavLink> */}
+            <button className='authButton mt-[20px]' onClick={orgAdd} >Добавить</button>
+
             <NavLink to='/admin' className='bigLeftBackBtnContainer'>
                 <img src={backBtnImg} alt="" />
             </NavLink>

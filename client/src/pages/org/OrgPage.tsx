@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, NavLink, useNavigate } from 'react-router-dom';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import Modal from '../../components/UI/modal/Modal';
-import { org_delete } from '../../http/clientsAPI';
+import { org_delete, org_get } from '../../http/clientsAPI';
 import { routes } from '../../consts';
 import backBtnImg from '../../img/previous.png'
 import mainBtnImg from '../../img/main-min.png'
@@ -26,9 +26,9 @@ const OrgPage = () => {
 
     const navigate = useNavigate()
 
-    useEffect(() => {
+    // useEffect(() => {
 
-    }, [])
+    // }, [])
 
     const startDeleteOrg = () => {
         setDeleteConfirmModal(true)
@@ -52,6 +52,8 @@ const OrgPage = () => {
                         case 'main':
                             return <div>
                                 главная: инфо об организации, лаборатории, телефония, смс-центр, дадата
+                                <br />
+                                комментарий: {currentOrg.comment}
                             </div>
 
                         case 'database':

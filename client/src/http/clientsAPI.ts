@@ -10,6 +10,11 @@ export const org_delete = async (org_id: number) => {
     return ("Удалено!")
 }
 
+export const org_get = async (org_id: number) => {
+    const {data} = await $authHost.post('api/user/get_org', {org_id})
+    return (data)
+}
+
 export const anydesk_add = async (anydesk_id: string, org_id: number, anydesk_password: string) => {
     await $authHost.post('api/user/add_anydesk', {anydesk_id, org_id, anydesk_password})
     return ("Добавлено!")

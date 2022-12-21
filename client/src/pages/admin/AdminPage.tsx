@@ -103,9 +103,21 @@ const AdminPage = () => {
                     {currentClients
                         .filter(c => c.org_name.toLowerCase().includes(textFilter.toLowerCase()))
                         .map(c => <tr key={c.org_id}>
-                            <td className={s.tableTd + ' w-[430px]'} data-th="Название организации"> <NavLink to={'/org/' + c.org_id}>{c.org_name}</NavLink></td>
+                            <td className={s.tableTd + ' w-[430px]'} data-th="Название организации"> <NavLink to={'/org/' + c.org_id} className='hover:cursor-pointer hover:font-bold'><div>{c.org_name}</div></NavLink></td>
                             <td className={s.tableTd + ' w-[300px]'} data-th="Пароль админа">{<CopiedText text={c.simed_admin_pass} />}</td>
-                            <td className={s.tableTd + ' w-[170px]'} data-th="Доступ к серверу"><div onClick={() => showRemoteAccess(c.org_id, c.remote_access)} className="hover:cursor-pointer">{c.remote_access}</div></td>
+                            <td className={s.tableTd + ' w-[170px]'} data-th="Доступ к серверу">
+                                {
+                                    c.remote_access === 'нет' ?
+                                        <div>
+                                            {c.remote_access}
+                                        </div>
+                                        :
+                                        <div onClick={() => showRemoteAccess(c.org_id, c.remote_access)} className="hover:cursor-pointer hover:font-bold">
+                                            {c.remote_access}
+                                        </div>
+                                }
+
+                            </td>
                             <td className={s.tableTd + ' w-[200px]'} data-th="Город">{c.city}</td>
                             {/* <td className={s.tableTd + ' w-[200px]'} data-th="Комментарий">{c.comment}</td> */}
                         </tr>
@@ -117,7 +129,7 @@ const AdminPage = () => {
             <Modal visible={remoteAccessModal} setVisible={setRemoteAccessModal}>
                 <div className='flex flex-col items-center w-[350px]'>
                     <p className='mb-[10px] text-[24px]'>Данные {remoteAccessType}</p>
-                    <hr className='w-[230px] mb-[10px]'/>
+                    <hr className='w-[230px] mb-[10px]' />
                     <div>
                         {
                             (() => {
@@ -129,11 +141,11 @@ const AdminPage = () => {
                                                 {rdpData[0].vpn_login && <div className='flex'><span className='mr-[10px]'>логин vpn:</span> <CopiedText text={rdpData[0].vpn_login} /> </div>}
                                                 {rdpData[0].vpn_password && <div className='flex'><span className='mr-[10px]'>пароль vpn:</span> <CopiedText text={rdpData[0].vpn_password} /> </div>}
                                                 {rdpData[0].vpn_type != 'автоматически' && <div className='flex'><span className='mr-[10px]'>тип vpn:</span> <CopiedText text={rdpData[0].vpn_type} /> </div>}
-                                                {rdpData[0].vpn_ip && <hr className='w-[230px] mt-[4px] mb-[4px]'/>}
+                                                {rdpData[0].vpn_ip && <hr className='w-[230px] mt-[4px] mb-[4px]' />}
                                                 <div className='flex'><span className='mr-[10px]'>ip rdp:</span> <CopiedText text={rdpData[0].rdp_ip} /> </div>
                                                 <div className='flex'><span className='mr-[10px]'>логин rdp:</span> <CopiedText text={rdpData[0].rdp_login} /> </div>
                                                 <div className='flex'><span className='mr-[10px]'>пароль rdp:</span> <CopiedText text={rdpData[0].rdp_password} /> </div>
-                                                {rdpData[0].windows_login && <hr className='w-[230px] mt-[4px] mb-[4px]'/>}
+                                                {rdpData[0].windows_login && <hr className='w-[230px] mt-[4px] mb-[4px]' />}
                                                 {rdpData[0].windows_login && <div className='flex'><span className='mr-[10px]'>windows логин:</span> <CopiedText text={rdpData[0].windows_login} /> </div>}
                                                 {rdpData[0].windows_password && <div className='flex'><span className='mr-[10px]'>windows пароль:</span> <CopiedText text={rdpData[0].windows_password} /> </div>}
                                             </div>

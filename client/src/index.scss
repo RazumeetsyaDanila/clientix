@@ -56,7 +56,7 @@ table td {
 }
 
 .bigAuthInput {
-    height: 120px;
+    height: 160px;
     width: 300px;
     margin-bottom: 10px;
     font-size: 18px;
@@ -64,6 +64,7 @@ table td {
     padding-top: 10px;
     border: 2px solid black;
     resize: none;
+    word-wrap: break-word;
     &:focus {
         background-color: transparent;
         outline: none;
