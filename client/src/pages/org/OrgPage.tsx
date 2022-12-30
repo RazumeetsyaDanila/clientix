@@ -23,6 +23,11 @@ const OrgPage = () => {
     const [view, setView] = useState("main")
 
     const [deleteConfirmModal, setDeleteConfirmModal] = useState(false)
+    const [mainEditModal, setMainEditModal] = useState(false)
+    const [databaseEditModal, setDatabaseEditModal] = useState(false)
+    const [queueEditModal, setQueueEditModal] = useState(false)
+    const [egiszEditModal, setEgiszEditModal] = useState(false)
+    const [contactsEditModal, setContactsEditModal] = useState(false)
 
     const navigate = useNavigate()
 
@@ -32,6 +37,14 @@ const OrgPage = () => {
 
     const startDeleteOrg = () => {
         setDeleteConfirmModal(true)
+    }
+
+    const startEditOrg = () => {
+        if(view === 'main') setMainEditModal(true)
+        if(view === 'database') setDatabaseEditModal(true)
+        if(view === 'queue') setQueueEditModal(true)
+        if(view === 'egisz') setEgiszEditModal(true)
+        if(view === 'contacts') setContactsEditModal(true)
     }
 
     const deleteOrg = () => {
@@ -100,6 +113,7 @@ const OrgPage = () => {
                 </div>
             </div>
 
+            <button className='btn w-[90px] h-[30px] editBtnPos' onClick={() => startEditOrg()}>Изменить</button>
             <button className='redBtn w-[90px] h-[30px] deleteBtnPos' onClick={() => startDeleteOrg()}>Удалить</button>
 
             <NavLink to='/admin' className='bigLeftBackBtnContainer'>
@@ -113,6 +127,37 @@ const OrgPage = () => {
                         <button className='btn w-[60px] h-[30px]' onClick={deleteOrg}>Да</button>
                         <button className='btn w-[60px] h-[30px]' onClick={() => setDeleteConfirmModal(false)}>Нет</button>
                     </div>
+                </div>
+            </Modal>
+
+            {/* модальные окна редактирования */}
+            <Modal visible={mainEditModal} setVisible={setMainEditModal}>
+                <div className='flex flex-col items-center w-[80vw] h-[82vh]'>
+                    редактирования главной
+                </div>
+            </Modal>
+
+            <Modal visible={databaseEditModal} setVisible={setDatabaseEditModal}>
+                <div className='flex flex-col items-center w-[80vw] h-[82vh]'>
+                    редактирование бд
+                </div>
+            </Modal>
+
+            <Modal visible={queueEditModal} setVisible={setQueueEditModal}>
+                <div className='flex flex-col items-center w-[80vw] h-[82vh]'>
+                    редактировние очереди
+                </div>
+            </Modal>
+
+            <Modal visible={egiszEditModal} setVisible={setEgiszEditModal}>
+                <div className='flex flex-col items-center w-[80vw] h-[82vh]'>
+                    редактирование ЕГИСЗ
+                </div>
+            </Modal>
+
+            <Modal visible={contactsEditModal} setVisible={setContactsEditModal}>
+                <div className='flex flex-col items-center w-[80vw] h-[82vh]'>
+                    редактирование контактов
                 </div>
             </Modal>
         </div>
