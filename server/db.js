@@ -4,14 +4,17 @@ const sqlConfig = {
     server: process.env.DB_HOST,
     database: process.env.DB_NAME,
     // порт для рабочего компа:
-    // port: 49951,
+    port: 59909,
     // порт для рабочего сервера:
     // port: 49166,
     options: {
-        trustServerCertificate: true,
-        cryptoCredentialsDetails: {
-            minVersion: 'TLSv1'
-        }
+        // для рабочего компа
+        encrypt:false
+
+        // trustServerCertificate: true,
+        // cryptoCredentialsDetails: {
+        //     minVersion: 'TLSv1'
+        // }
     }
 };
 
