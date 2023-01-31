@@ -3,8 +3,10 @@ const sqlConfig = {
     password: process.env.DB_PASSWORD,
     server: process.env.DB_HOST,
     database: process.env.DB_NAME,
-    // порт для рабочего компа:
-    port: 59909,
+    // порт для рабочего компа 1:
+    // port: 59909,
+    // порт для рабочего компа 2:
+    port: 64599,
     // порт для рабочего сервера:
     // port: 49166,
     options: {
