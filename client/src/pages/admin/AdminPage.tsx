@@ -108,7 +108,7 @@ const AdminPage = () => {
                             <td className={s.tableTd + ' w-[170px]'} data-th="Доступ к серверу">
                                 {
                                     c.remote_access === 'нет' ?
-                                        <div>
+                                        <div className="cursor-default">
                                             {c.remote_access}
                                         </div>
                                         :
@@ -127,7 +127,7 @@ const AdminPage = () => {
 
 
             <Modal visible={remoteAccessModal} setVisible={setRemoteAccessModal}>
-                <div className='flex flex-col items-center w-[350px]'>
+                <div className='flex flex-col items-center w-[380px]'>
                     <p className='mb-[10px] text-[24px]'>Данные {remoteAccessType}</p>
                     <hr className='w-[230px] mb-[10px]' />
                     <div>
