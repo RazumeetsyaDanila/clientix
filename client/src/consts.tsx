@@ -1,4 +1,4 @@
-let placeOfWork = 'work' //work - рабочий комп, home - домашний комп, prod - рабочий сервер
+let placeOfWork = 'home' //work - рабочий комп, home - домашний комп, prod - рабочий сервер
 
 export let REACT_APP_API_URL: string
 export let REACT_APP_URL: string
@@ -8,7 +8,7 @@ if(placeOfWork == 'work'){
     REACT_APP_URL = 'http://localhost:3000/'
 }
 if(placeOfWork == 'home'){
-    REACT_APP_API_URL = 'http://192.168.1.107:5000/'
+    REACT_APP_API_URL = 'http://192.168.1.105:5000/'
     REACT_APP_URL = 'http://localhost:3000/'
 }
 if(placeOfWork == 'prod'){
