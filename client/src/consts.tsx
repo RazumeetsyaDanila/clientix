@@ -1,4 +1,4 @@
-let placeOfWork = 'home' //work - рабочий комп, home - домашний комп, prod - рабочий сервер
+let placeOfWork = 'work' //work - рабочий комп, home - домашний комп, prod - рабочий сервер
 
 export let REACT_APP_API_URL: string
 export let REACT_APP_URL: string

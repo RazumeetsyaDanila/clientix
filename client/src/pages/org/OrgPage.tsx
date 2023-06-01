@@ -11,6 +11,7 @@ import databaseBtnImg from '../../img/database-min.png'
 import queueBtnImg from '../../img/queue-min.png'
 import edocBtnImg from '../../img/edoc-min.png'
 import SideMenuItem from '../../components/UI/sideMenuItem/SideMenuItem';
+import { anydesk_get, rdp_get } from '../../http/clientsAPI';
 
 const OrgPage = () => {
     const params = useParams();
@@ -19,6 +20,8 @@ const OrgPage = () => {
 
     const { clients, loading, error } = useTypedSelector(state => state.clients)
     const currentOrg = clients.find(clients => clients.org_id == orgId)
+
+    const [currentOrgRemoteAccess, setCurrentOrgRemoteAccess] = useState<any[]>([{}])
 
     const [view, setView] = useState("main")
 
@@ -31,9 +34,22 @@ const OrgPage = () => {
 
     const navigate = useNavigate()
 
-    // useEffect(() => {
+    useEffect(() => {
+        getRemoteAccess(orgIdNum, currentOrg.remote_access)
+    }, [])
 
-    // }, [])
+    const getRemoteAccess = async (orgIdNum: number, accessType: string) => {
+        if (accessType === "anydesk") {
+            const accessData: any = await anydesk_get(orgIdNum)
+            setCurrentOrgRemoteAccess(accessData)
+        }
+        if (accessType === "rdp") {
+            const accessData: any = await rdp_get(orgIdNum)
+            setCurrentOrgRemoteAccess(accessData)
+        }
+
+        // console.log(anydeskData[0].anydesk_id)
+    }
 
     const startDeleteOrg = () => {
         setDeleteConfirmModal(true)
@@ -67,6 +83,18 @@ const OrgPage = () => {
                                 главная: инфо об организации, лаборатории, телефония, смс-центр, дадата
                                 <br />
                                 комментарий: {currentOrg.comment}
+                                <br />
+                                удаленный доступ: {currentOrg.remote_access}
+                                <br />
+                                город: {currentOrg.city}
+                                <br />
+                                пароль админа: {currentOrg.simed_admin_pass}
+                                <hr />
+                                Инфо о подключении: 
+                                <br />
+                                ID: {currentOrgRemoteAccess[0].anydesk_id}
+                                <br />
+                                пароль: {currentOrgRemoteAccess[0].anydesk_password}
                             </div>
 
                         case 'database':
