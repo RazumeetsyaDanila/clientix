@@ -14,3 +14,7 @@
 
 
 /server/node_modules
+
+# config connection files
+/client/src/consts.tsx
+/server/db.js

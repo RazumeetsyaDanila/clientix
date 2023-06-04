@@ -177,6 +177,22 @@ class UserController {
         }
     }
 
+    async update_anydesk(req, res, next) {
+        try {
+            const { anydesk_id, new_anydesk_id, anydesk_password } = req.body
+            let pool = await sql.connect(sqlConfig)
+
+            await pool.request()
+                .input('anydesk_id', sql.VarChar, anydesk_id)
+                .input('new_anydesk_id', sql.VarChar, new_anydesk_id)
+                .input('anydesk_password', sql.VarChar, anydesk_password)
+                .query('UPDATE anydesk SET anydesk_id = @new_anydesk_id, anydesk_password = @anydesk_password WHERE anydesk_id = @anydesk_id')
+            return res.json({ message: "Anydesk добавлен!" })
+        } catch (e) {
+            return res.json(e.message);
+        }
+    }
+
     async get_anydesk(req, res, next) {
         try {
             const { org_id } = req.body

@@ -20,6 +20,11 @@ export const anydesk_add = async (anydesk_id: string, org_id: number, anydesk_pa
     return ("Добавлено!")
 }
 
+export const anydesk_update = async (anydesk_id: string, new_anydesk_id: string, anydesk_password: string) => {
+    await $authHost.post('api/user/update_anydesk', {anydesk_id, new_anydesk_id, anydesk_password})
+    return ("Изменено!")
+}
+
 export const anydesk_get = async (org_id: number) => {
     const {data} = await $authHost.post('api/user/get_anydesk', {org_id})
     return (data)

@@ -11,7 +11,7 @@ import databaseBtnImg from '../../img/database-min.png'
 import queueBtnImg from '../../img/queue-min.png'
 import edocBtnImg from '../../img/edoc-min.png'
 import SideMenuItem from '../../components/UI/sideMenuItem/SideMenuItem';
-import { anydesk_get, rdp_get } from '../../http/clientsAPI';
+import { anydesk_get, rdp_get, anydesk_update } from '../../http/clientsAPI';
 
 const OrgPage = () => {
     const params = useParams();
@@ -31,6 +31,13 @@ const OrgPage = () => {
     const [queueEditModal, setQueueEditModal] = useState(false)
     const [egiszEditModal, setEgiszEditModal] = useState(false)
     const [contactsEditModal, setContactsEditModal] = useState(false)
+
+    const [editOrgComment, setEditOrgComment] = useState('')
+    const [editOrgRemoteAccess, setEditOrgRemoteAccess] = useState('')
+    const [editOrgCity, setEditOrgCity] = useState('')
+    const [editOrgSimedAdminPass, setEditOrgSimedAdminPass] = useState('')
+    const [editOrgAnydeskId, setEditOrgAnydeskId] = useState('')
+    const [editOrgAnydeskPassword, setEditOrgAnydeskPassword] = useState('')
 
     const navigate = useNavigate()
 
@@ -56,11 +63,19 @@ const OrgPage = () => {
     }
 
     const startEditOrg = () => {
-        if(view === 'main') setMainEditModal(true)
-        if(view === 'database') setDatabaseEditModal(true)
-        if(view === 'queue') setQueueEditModal(true)
-        if(view === 'egisz') setEgiszEditModal(true)
-        if(view === 'contacts') setContactsEditModal(true)
+        if (view === 'main') {
+            setMainEditModal(true)
+            setEditOrgComment(currentOrg.comment)
+            setEditOrgRemoteAccess(currentOrg.remote_access)
+            setEditOrgCity(currentOrg.city)
+            setEditOrgSimedAdminPass(currentOrg.simed_admin_pass)
+            setEditOrgAnydeskId(currentOrgRemoteAccess[0].anydesk_id)
+            setEditOrgAnydeskPassword(currentOrgRemoteAccess[0].anydesk_password)
+        }
+        if (view === 'database') setDatabaseEditModal(true)
+        if (view === 'queue') setQueueEditModal(true)
+        if (view === 'egisz') setEgiszEditModal(true)
+        if (view === 'contacts') setContactsEditModal(true)
     }
 
     const deleteOrg = () => {
@@ -68,6 +83,13 @@ const OrgPage = () => {
         setDeleteConfirmModal(false)
         navigate(routes.ADMIN_ROUTE)
     }
+
+    const applyEditAnydesk = () => {
+        anydesk_update(currentOrgRemoteAccess[0].anydesk_id, editOrgAnydeskId, editOrgAnydeskPassword)
+        getRemoteAccess(orgIdNum, editOrgRemoteAccess)
+        setMainEditModal(false)
+    }
+
 
     if (loading) return <h1 className='centerContainer h-screen text-2xl'>Идет загрузка...</h1>
     if (error) return <h1 className='centerContainer h-screen text-2xl'>{error}</h1>
@@ -90,7 +112,7 @@ const OrgPage = () => {
                                 <br />
                                 пароль админа: {currentOrg.simed_admin_pass}
                                 <hr />
-                                Инфо о подключении: 
+                                Инфо о подключении:
                                 <br />
                                 ID: {currentOrgRemoteAccess[0].anydesk_id}
                                 <br />
@@ -161,7 +183,35 @@ const OrgPage = () => {
             {/* модальные окна редактирования */}
             <Modal visible={mainEditModal} setVisible={setMainEditModal}>
                 <div className='flex flex-col items-center w-[80vw] h-[82vh]'>
-                    редактирования главной
+                    <div>
+                        <br />
+                        комментарий:
+                        <input className='authInput' type="text" placeholder="комментарий" value={editOrgComment} onChange={e => setEditOrgComment(e.target.value)} />
+                        <br />
+                        
+                        город:
+                        <input className='authInput' type="text" placeholder="город" value={editOrgCity} onChange={e => setEditOrgCity(e.target.value)} />
+                        <br />
+                        пароль админа:
+                        <input className='authInput' type="text" placeholder="пароль админа в симед" value={editOrgSimedAdminPass} onChange={e => setEditOrgSimedAdminPass(e.target.value)} />
+                        <hr />
+                        Инфо о подключении:
+                        <br />
+                        удаленный доступ:
+                        {/* <input className='authInput' type="text" placeholder="удаленный доступ" value={editOrgRemoteAccess} onChange={e => setEditOrgRemoteAccess(e.target.value)} /> */}
+                        <select value={editOrgRemoteAccess} className='border-[2px] border-[black] bg-[#fff] w-[300px] mb-[10px] h-[40px] pl-[8px]' onChange={e => setEditOrgRemoteAccess(e.target.value)} >
+                            <option value={'нет'}>нет</option>
+                            <option value={'anydesk'} selected >anydesk</option>
+                            <option value={'rdp'}>rdp</option>
+                        </select>
+                        <br />
+                        ID:
+                        <input className='authInput' type="text" placeholder="id anydesk" value={editOrgAnydeskId} onChange={e => setEditOrgAnydeskId(e.target.value)} />
+                        <br />
+                        пароль:
+                        <input className='authInput' type="text" placeholder="пароль anydesk" value={editOrgAnydeskPassword} onChange={e => setEditOrgAnydeskPassword(e.target.value)} />
+                        <button className='btn w-[300px] h-[40px] mb-[10px]' onClick={applyEditAnydesk}>Применить изменения anydesk</button>
+                    </div>
                 </div>
             </Modal>
 

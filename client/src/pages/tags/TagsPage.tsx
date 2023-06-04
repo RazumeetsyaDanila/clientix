@@ -1,4 +1,4 @@
-import React, { useEffect,useLayoutEffect, useState } from 'react';
+import React, { useEffect,useLayoutEffect, useState, useRef } from 'react';
 import { useActions } from '../../hooks/useActions';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { NavLink } from 'react-router-dom';
@@ -8,6 +8,7 @@ import { delete_tag, update_tag } from '../../http/tagsAPI';
 import backBtnImg from '../../img/previous.png';
 import refreshBtnImg from '../../img/refresh.png';
 import clearImg from '../../img/clear-img.png';
+
 
 const TagsPage = () => {
     const { tags, tagsGroups, loading, error } = useTypedSelector(state => state.tags)
@@ -77,8 +78,16 @@ const TagsPage = () => {
         setDeleteConfirmModal(false)
     }
 
+    const nameField = React.useRef(document.createElement("input"))
+
+    const clearSearch = () => {
+        nameField.current.focus()
+        setTextFilter('')
+    }
+
     if (loading) return <h1 className='centerContainer h-screen text-2xl'>Идет загрузка...</h1>
     if (error) return <h1 className='centerContainer h-screen text-2xl'><p className='mb-[10px]'>{error}</p><NavLink to='/login' className='btn w-[420px] h-[40px]'>Вернуться на страницу авторизации</NavLink></h1>
+
 
     return (
         <div className='centerContainer mt-[10px]'>
@@ -88,8 +97,8 @@ const TagsPage = () => {
             <div className='headerContainer w-[1010px]'>
                 {/* {currentUserRole === 'admin' ? <NavLink to='/admin' className='btn w-[90px] h-[30px]'>← Назад</NavLink> : <NavLink to='/slave' className='btn w-[90px] h-[30px]'>← Назад</NavLink>} */}
                 <div className='flex relative'>
-                    <input placeholder='Поиск тега по наименованию...' className='input w-[320px] mr-[20px]' type="text" value={textFilter} onChange={e => setTextFilter(e.target.value)} />
-                    <img src={clearImg} alt="" className='absolute left-[280px] w-[20px] h-[20px] ml-[10px] mr-[20px] cursor-pointer opacity-[0.5] hover:opacity-[1] self-center' onClick={() => setTextFilter('')}/>
+                    <input placeholder='Поиск тега по наименованию...' ref={nameField} className='input w-[320px] mr-[20px]' type="text" value={textFilter} onChange={e => setTextFilter(e.target.value)} />
+                    <img src={clearImg} alt="" className='absolute left-[280px] w-[20px] h-[20px] ml-[10px] mr-[20px] cursor-pointer opacity-[0.5] hover:opacity-[1] self-center' onClick={clearSearch}/>
                     <select className='btn w-[230px] h-[30px] pl-[10px]' onChange={e => filterTags(e)} >
                         <option value={0}>Все</option>
                         {tagsGroups.map(t => <option key={t.group_id} value={t.group_id}>{t.group_name}</option>)}
