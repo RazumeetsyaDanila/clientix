@@ -193,6 +193,20 @@ class UserController {
         }
     }
 
+    async delete_anydesk(req, res, next) {
+        try {
+            const { anydesk_id } = req.body
+            let pool = await sql.connect(sqlConfig)
+
+            await pool.request()
+                .input('anydesk_id', sql.VarChar, anydesk_id)
+                .query('DELETE anydesk WHERE anydesk_id = @anydesk_id')
+            return res.json({ message: "Anydesk удален!" })
+        } catch (e) {
+            return res.json(e.message);
+        }
+    }
+
     async get_anydesk(req, res, next) {
         try {
             const { org_id } = req.body
@@ -226,6 +240,43 @@ class UserController {
                 .query('INSERT INTO rdp (org_id, vpn_ip, vpn_login, vpn_password, vpn_type, rdp_ip, rdp_login, rdp_password, windows_login, windows_password)' +
                     'VALUES (@org_id, @vpn_ip, @vpn_login, @vpn_password, @vpn_type, @rdp_ip, @rdp_login, @rdp_password, @windows_login, @windows_password)')
             return res.json({ message: "rdp добавлен!" })
+        } catch (e) {
+            return res.json(e.message);
+        }
+    }
+
+    async update_rdp(req, res, next) {
+        try {
+            const { rdp_id, vpn_ip, vpn_login, vpn_password, vpn_type, rdp_ip, rdp_login, rdp_password, windows_login, windows_password} = req.body
+            let pool = await sql.connect(sqlConfig)
+
+            await pool.request()
+                .input('rdp_id', sql.Int, rdp_id)
+                .input('vpn_ip', sql.VarChar, vpn_ip)
+                .input('vpn_login', sql.VarChar, vpn_login)
+                .input('vpn_password', sql.VarChar, vpn_password)
+                .input('vpn_type', sql.VarChar, vpn_type)
+                .input('rdp_ip', sql.VarChar, rdp_ip)
+                .input('rdp_login', sql.VarChar, rdp_login)
+                .input('rdp_password', sql.VarChar, rdp_password)
+                .input('windows_login', sql.VarChar, windows_login)
+                .input('windows_password', sql.VarChar, windows_password)
+                .query('UPDATE rdp SET vpn_ip = @vpn_ip, vpn_login = @vpn_login, vpn_password = @vpn_password, vpn_type = @vpn_type, rdp_ip = @rdp_ip, rdp_login = @rdp_login, rdp_password = @rdp_password, windows_login = @windows_login, windows_password = @windows_password WHERE rdp_id = @rdp_id')
+            return res.json({ message: "rdp обновлено!" })
+        } catch (e) {
+            return res.json(e.message);
+        }
+    }
+
+    async delete_rdp(req, res, next) {
+        try {
+            const { rdp_id } = req.body
+            let pool = await sql.connect(sqlConfig)
+
+            await pool.request()
+                .input('rdp_id', sql.Int, rdp_id)
+                .query('DELETE rdp WHERE rdp_id = @rdp_id')
+            return res.json({ message: "rdp удалено!" })
         } catch (e) {
             return res.json(e.message);
         }
